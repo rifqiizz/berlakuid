@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold dark:text-indigo-600;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl font-bold;
+  }
+  h4 {
+    @apply text-xl font-bold;
+  }
+  h5 {
+    @apply text-lg font-bold;
+  }
+  h6 {
+    @apply text-base font-bold;
+  }
+}
+
+@layer components {
+  .menu {
+    @apply w-full flex gap-4 cursor-pointer items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition duration-300;
+  }
+}
