@@ -21,19 +21,26 @@ model User {
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  expiryObj ExpiryObject[]
+  task Task[]
 }
 
-model ExpiryObject {
+model Task {
   id String @id @default(uuid())
   name String
   slug String @unique
   description String
   featuredImage String
-  images String[]
   category String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId String
   user User @relation(fields: [userId], references: [id])
+  expiryDate DateTime
+  dayReminder Int
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String
+  desc String
 }

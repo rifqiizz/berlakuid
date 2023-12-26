@@ -20,8 +20,12 @@ export const Header = () => {
         <div className="text-2xl">berlaku.id</div>
       </Link>
       <div className="flex gap-4 items-center">
-        <div>About</div>
-        <div>Features</div>
+        <Link href="https://berlakuidlanding.vercel.app/">
+          <div>About</div>
+        </Link>
+        <Link href="/dashboard">
+          <div>Dashboard</div>
+        </Link>
         <Link href='/login'>Login</Link>
         <Link href="/register" passHref>
             <Button>Register</Button>
