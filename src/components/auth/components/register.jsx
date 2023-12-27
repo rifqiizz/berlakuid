@@ -21,25 +21,27 @@ export const Register = () => {
   }
 
   return (
-    <div className="w-[460px] space-y-8">
+    <div className="h-screen flex items-center justify-center">
       <div>
-        <h3>Register</h3>
-        <p>Please create an account</p>
-      </div>
-      <form onSubmit={handleRegister}>
-        <div className="space-y-2">
-          <div className="grid grid-cols-2 gap-2">
-            <Input name="firstName" placeholder="First Name" />
-            <Input name="lastName" placeholder="Last Name" />
-          </div>
-          <Input name="username" placeholder="Username" />
-          <Input name="email" placeholder="Email" />
-          <Input name="password" placeholder="Password" type="password" />
-          <Button color="primary" type="submit" className="w-full">
-            Register
-          </Button>
+        <div className="my-8">
+          <h3>Register</h3>
+          <p>Please create an account</p>
         </div>
-      </form>
+        <form onSubmit={handleRegister}>
+          <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <Input name="firstName" placeholder="First Name" />
+              <Input name="lastName" placeholder="Last Name" />
+            </div>
+            <Input name="username" placeholder="Username" />
+            <Input name="email" placeholder="Email" />
+            <Input name="password" placeholder="Password" type="password" />
+            <Button color="primary" type="submit" className="w-full">
+              Register
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

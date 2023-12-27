@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Input } from "@nextui-org/react";
+import {Image} from "@nextui-org/react";
 import React from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -31,10 +32,18 @@ export const Login = () => {
   }
 
   return (
-    <div className="w-[360px] space-y-8">
-      <div>
-        <h3>Login</h3>
-        <p>Welcome back!</p>
+    <div className="h-screen flex items-center justify-center">
+      <div className="px-8">
+        <Image
+          width={300}
+          alt="NextUI hero Image"
+          src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+        />
+      </div>
+      <div className="">
+      <div className="my-8">
+        <h2>berlaku.id</h2>
+        <p>Selamat datang di berlaku.id - sistem pengingat kaya fitur</p>
       </div>
       <form onSubmit={handleLogin}>
         <div className="space-y-2">
@@ -45,6 +54,7 @@ export const Login = () => {
           </Button>
         </div>
       </form>
+      </div>
     </div>
   );
 };

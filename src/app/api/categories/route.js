@@ -11,7 +11,7 @@ export async function GET(request) {
 
   console.log("Mulai API Task categories");
 
-  let tasks = null;
+  let categories = null;
 
   try {
     if (slug) {
@@ -20,7 +20,7 @@ export async function GET(request) {
           slug,
         },
         include: {
-          user: {
+          category: {
             select: {
               username: true,
             },
@@ -33,9 +33,9 @@ export async function GET(request) {
 
     categories = await prisma.category.findMany({
       include: {
-        user: {
+        category: {
           select: {
-            username: true,
+          
           },
         },
       },
@@ -44,5 +44,7 @@ export async function GET(request) {
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Error fetching categories" });
-  }
+  } 
+
+  //return NextResponse.json({ message: "Im trying fetching categories" });
 }
