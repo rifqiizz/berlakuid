@@ -41,6 +41,6 @@ model Task {
 
 model Category {
   id String @id @default(uuid())
-  name String
+  name String @unique
   desc String
 }
