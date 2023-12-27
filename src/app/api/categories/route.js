@@ -21,9 +21,7 @@ export async function GET(request) {
         },
         include: {
           category: {
-            select: {
-              username: true,
-            },
+            
           },
         },
       });
@@ -32,13 +30,7 @@ export async function GET(request) {
     }
 
     categories = await prisma.category.findMany({
-      include: {
-        category: {
-          select: {
-          
-          },
-        },
-      },
+      
     });
     return NextResponse.json({ data: categories, message: "All Categories fetched successfully" });
   } catch (error) {
