@@ -1,4 +1,4 @@
-import { Inter as FontSans } from "next/font/google";
+import { Montserrat as FontSans } from "next/font/google";
 import { Provider } from "@/components/provider";
 
 import "@/styles/globals.css";
