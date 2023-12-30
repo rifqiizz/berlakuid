@@ -18,22 +18,26 @@ export const Header = () => {
 
   return (
     <header className="flex justify-between items-center">
-      <Link href="/">
+      <Link href="/dashboard">
         <div className="text-2xl">berlaku.id</div>
       </Link>
       <div className="flex gap-4 items-center font-bold">
-        <Link href="https://berlakuidlanding.vercel.app/">
-          <div>About</div>
+        <Link href="https://berlaku.id">
+          <div>Tentang</div>
         </Link>
         <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
-         <Link href="/new-task">
-          <div>New Task</div>
+        <Link href="#">
+          <div>Daftar Task</div>
         </Link>
-       
-        
-        
+        <Link href="/new-task">
+          <div>Buat Task</div>
+        </Link>
+        <Link href="#">
+          <div>Riwayat</div>
+        </Link>
+
         <Switch size="sm" onChange={(e) => setThemeMode(e.target.checked)} />
         <Profile/>
       </div>
