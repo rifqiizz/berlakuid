@@ -10,7 +10,13 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBlueLight: '#C9E0F6',
+        customBlueMain: '#0066CC',
+        
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

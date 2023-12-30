@@ -27,4 +27,59 @@
   .menu {
     @apply w-full flex gap-4 cursor-pointer items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition duration-300;
   }
+  .box-white-outer{
+    @apply bg-white h-[85%];
+    border-radius: 50px 50px 0 0;
+  
+  }
+  .card-counter{
+    @apply bg-white rounded-lg p-7;
+    box-shadow: 0px 0px 10px 2px #00000040;
+  }
+  .card-item-list{
+     @apply bg-white p-5 mb-3;
+     box-shadow: 0px 0px 10px 2px #00000040;
+  }
+  .card-counter-wrap {
+
+    border-bottom: 2px solid #918f8f40;
+  }
+  .btn-main{
+    background-color: #0066CC !important;
+    color:#ffffff !important;
+    font-weight: bold !important;
+    border-radius: 100px !important;
+  }
+  .btn-add{
+    right: 8rem !important;
+    position: fixed !important;
+    bottom: 1rem !important;
+  }
+  .box-middle{
+    @apply bg-white p-8 max-w-2xl m-auto;
+    box-shadow: 0px 0px 10px 2px #00000040;
+    border-radius: 30px;
+  }
+  .box-middle > div{
+    @apply py-3;
+    font-family: var(--font-roboto)
+  }
+ 
+  .detail {
+    display: flex;
+    align-items: center;
+  }
+  .label{
+    @apply w-[40%]
+  }
+
+  .label {
+    font-weight: bold;
+  }
+  @media(max-width:767px){
+    .mobile-hide{
+      display: none;
+    }
+
+  }
 }

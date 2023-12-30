@@ -3,6 +3,8 @@
 import { useTheme } from "next-themes";
 import { Button, Switch } from "@nextui-org/react";
 import Link from "next/link";
+import Profile from "./profile";
+
 export const Header = () => {
   const { theme, setTheme } = useTheme();
 
@@ -19,29 +21,21 @@ export const Header = () => {
       <Link href="/">
         <div className="text-2xl">berlaku.id</div>
       </Link>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center font-bold">
         <Link href="https://berlakuidlanding.vercel.app/">
           <div>About</div>
         </Link>
         <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
-        <Link href="/">
-          <div>Categories</div>
+         <Link href="/new-task">
+          <div>New Task</div>
         </Link>
-        <Link href="/">
-          <div>Tasks</div>
-        </Link>
-        <Link href="/">
-          <div>Cron</div>
-        </Link>
-        <Link href='/login'>Login</Link>
-        <Link href="/register" passHref>
-            <Button>Register</Button>
-        </Link>
+       
+        
         
         <Switch size="sm" onChange={(e) => setThemeMode(e.target.checked)} />
-        <Link href='/logout'>Logout</Link>
+        <Profile/>
       </div>
     </header>
   );

@@ -1,33 +1,39 @@
-import { Card, CardBody } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React from "react";
+import CardCounter from "./cardCounter";
+import CardItemList from "./cardItemList";
+import { Plus } from 'lucide-react';
 
 export const Dashboard = () => {
   return (
     <main className="space-y-8">
       <section>
-        <h2>Dashboard</h2>
+        <h2>Reminder List</h2>
         <p>Here you can see the overview of your berlaku items.</p>
       </section>
-      <section className="grid grid-cols-3 gap-6">
-        <Card shadow="sm">
-          <CardBody className="p-8 space-y-4">
-            <h6>Total Items</h6>
-            <h1>24</h1>
-          </CardBody>
-        </Card>
-        <Card shadow="sm">
-          <CardBody className="p-8 space-y-4">
-            <h6>Soon in the next month</h6>
-            <h1>6</h1>
-          </CardBody>
-        </Card>
-        <Card shadow="sm">
-          <CardBody className="p-8 space-y-4">
-            <h6>Soon in the next week</h6>
-            <h1>0</h1>
-          </CardBody>
-        </Card>
+      <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
+        <CardCounter item="24" text="Total Items" />
+        <CardCounter item="6" text="Soon in the next month" />
+        <CardCounter item="8" text="Soon in the next week"/>
+      
+       
       </section>
+      <section className="mobile-hide flex font-bold px-5">
+        <div className='basis-1/2'>Name</div>
+        <div className='basis-2/12'>Category</div>
+        <div className='basis-4/12'>Reminder On</div>
+      </section>
+      <section className="">
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
+        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM"/>
+      </section>
+      <Button className="btn-main btn-add">
+        <Plus />Create New Task
+      </Button>  
     </main>
   );
 };
