@@ -41,8 +41,19 @@
      box-shadow: 0px 0px 10px 2px #00000040;
   }
   .card-counter-wrap {
-    
+
     border-bottom: 2px solid #918f8f40;
+  }
+  .btn-main{
+    background-color: #0066CC !important;
+    color:#ffffff !important;
+    font-weight: bold !important;
+    border-radius: 100px !important;
+  }
+  .btn-add{
+    right: 8rem !important;
+    position: fixed !important;
+    bottom: 1rem !important;
   }
   @media(max-width:767px){
     .mobile-hide{

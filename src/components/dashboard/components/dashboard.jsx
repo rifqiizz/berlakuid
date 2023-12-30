@@ -1,7 +1,8 @@
-import { Card, CardBody } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React from "react";
 import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
+import { Plus } from 'lucide-react';
 
 export const Dashboard = () => {
   return (
@@ -30,6 +31,9 @@ export const Dashboard = () => {
         <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
         <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM"/>
       </section>
+      <Button className="btn-main btn-add">
+        <Plus />Create New Task
+      </Button>  
     </main>
   );
 };

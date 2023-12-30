@@ -28,6 +28,9 @@ export const Header = () => {
         <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
+         <Link href="/new-task">
+          <div>New Task</div>
+        </Link>
        
         
         
