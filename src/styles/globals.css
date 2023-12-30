@@ -27,4 +27,9 @@
   .menu {
     @apply w-full flex gap-4 cursor-pointer items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition duration-300;
   }
+  .box-white-outer{
+    @apply bg-white h-[80%];
+    border-radius: 50px 50px 0 0;
+  
+  }
 }
