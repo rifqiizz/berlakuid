@@ -6,7 +6,7 @@ import prisma from "@/utils/prisma";
 
 export async function GET(request, { params }) {
   //get params id
-  const id = parseInt(params.id);
+  const id = params.id;
 
   //get detail post
   const post = await prisma.user.findUnique({
@@ -44,7 +44,7 @@ export async function GET(request, { params }) {
 
 export async function PATCH(request, { params }) {
   //get params id
-  const id = parseInt(params.id);
+  const id = params.id;
 
   //get request data
   const { name, description } = await request.json();
@@ -76,7 +76,7 @@ export async function PATCH(request, { params }) {
 
 export async function DELETE(request, { params }) {
   //get params id
-  const id = parseInt(params.id);
+  const id = params.id;
 
   //delete data
   await prisma.user.delete({
