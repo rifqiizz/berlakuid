@@ -1,10 +1,21 @@
+
 import { Button } from "@nextui-org/react";
 import React from "react";
 import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
 import { Plus } from 'lucide-react';
+import { apiUrl } from "@/config/apiUrl";
 
-export const Dashboard = () => {
+async function getData() {
+  const res = await fetch(`${ apiUrl }/tasks`);
+  const data = await res.json();
+  return data;
+}
+
+export async function Dashboard () {
+  const { data } = await getData();
+  console.log(data);
+
   return (
     <main className="space-y-8">
       <section>
@@ -23,17 +34,16 @@ export const Dashboard = () => {
         <div className='basis-2/12'>Category</div>
         <div className='basis-4/12'>Reminder On</div>
       </section>
-      <section className="">
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM" />
-        <CardItemList name="Driver's license renewal" category="document" reminderOn="Monday, 14 December 2023  06 :30 PM"/>
-      </section>
       <Button className="btn-main btn-add">
         <Plus />Create New Task
       </Button>  
+      <section className="">
+        {data?.map((data) => {
+          //return <CardItemList key={id} id={id} name={name} slug={slug} description={description} category={category} username={user.username} />;
+          return <CardItemList name={data.name} category={data.category} reminderOn={data.expiryDate} />;
+          //return <div>{name} {category} {expiryDate} </div>;
+        })}
+      </section>
     </main>
   );
 };
