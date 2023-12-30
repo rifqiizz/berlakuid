@@ -21,7 +21,7 @@ export const Header = () => {
       <Link href="/">
         <div className="text-2xl">berlaku.id</div>
       </Link>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center font-bold">
         <Link href="https://berlakuidlanding.vercel.app/">
           <div>About</div>
         </Link>
