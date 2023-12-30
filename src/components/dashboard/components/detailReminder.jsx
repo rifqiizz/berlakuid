@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from "@nextui-org/react";
 
 const DetailReminder = () => {
   return (
@@ -38,8 +39,17 @@ const DetailReminder = () => {
             <span className="label">Time Reminder:</span>
             <span className="value">06:30 PM</span>
           </div>
+          <div className='button-holder flex justify-between'>
+            <Button color="primary">
+              Edit
+            </Button> 
+            <Button color="primary">
+              Delete
+            </Button> 
+          </div>
         </div>
       </section>
+      
       
     </main>
   );
