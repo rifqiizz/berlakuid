@@ -9,18 +9,18 @@ export async function GET(request, { params }) {
   const id = parseInt(params.id);
 
   //get detail post
-  const post = await prisma.task.findUnique({
+  const post = await prisma.user.findUnique({
     where: {
       id,
     },
   });
 
-  if (!task) {
+  if (!user) {
     //return response JSON
     return NextResponse.json(
       {
         sucess: true,
-        message: "Detail Data Task Not Found!",
+        message: "Detail Data User Not Found!",
         data: null,
       },
       {
@@ -33,8 +33,8 @@ export async function GET(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Detail Data Task",
-      data: task,
+      message: "Detail Data User",
+      data: user,
     },
     {
       status: 200,
@@ -50,7 +50,7 @@ export async function PATCH(request, { params }) {
   const { name, description } = await request.json();
 
   //update data
-  const post = await prisma.task.update({
+  const post = await prisma.user.update({
     where: {
       id,
     },
@@ -65,8 +65,8 @@ export async function PATCH(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Updated!",
-      data: task,
+      message: "Data User Updated!",
+      data: user,
     },
     {
       status: 200,
@@ -79,7 +79,7 @@ export async function DELETE(request, { params }) {
   const id = parseInt(params.id);
 
   //delete data
-  await prisma.task.delete({
+  await prisma.user.delete({
     where: {
       id,
     },
@@ -89,7 +89,7 @@ export async function DELETE(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Deleted!",
+      message: "Data User Deleted!",
     },
     {
       status: 200,

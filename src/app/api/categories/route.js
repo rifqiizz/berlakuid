@@ -19,11 +19,6 @@ export async function GET(request) {
         where: {
           slug,
         },
-        include: {
-          category: {
-            
-          },
-        },
       });
 
       return NextResponse.json({ data: category, message: "Category fetched successfully" });
