@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Button, Switch } from "@nextui-org/react";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button,Switch} from "@nextui-org/react";
 import Link from "next/link";
 import Profile from "./profile";
 
@@ -28,15 +28,32 @@ export const Header = () => {
         <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
-        <Link href="#">
-          <div>Daftar Task</div>
-        </Link>
-        <Link href="/new-task">
-          <div>Buat Task</div>
-        </Link>
-        <Link href="#">
-          <div>Riwayat</div>
-        </Link>
+       
+        <Dropdown>
+          <DropdownTrigger>
+            <Link href="#">
+              <div className="underline underline-offset-4">Task</div>
+            </Link>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions">
+            <DropdownItem key="daftar">
+              <Link href="#">
+              <div>Daftar</div>
+              </Link>
+            </DropdownItem>
+            <DropdownItem key="new">
+              <Link href="/new-task">
+                <div>Buat Baru</div>
+              </Link>
+            </DropdownItem>
+            <DropdownItem key="riwayat">
+              <Link href="#">
+                <div>Riwayat</div>
+              </Link>
+            </DropdownItem>
+           
+          </DropdownMenu>
+        </Dropdown>
 
         <Switch size="sm" onChange={(e) => setThemeMode(e.target.checked)} />
         <Profile/>
