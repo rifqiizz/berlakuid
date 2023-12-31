@@ -8,8 +8,13 @@ import { cookies } from "next/headers";
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
+  const limit = searchParams.get("limit");
+  //console.log(searchParams);
   
   let tasks = null;
+  let task = null;
+  let tasksLimited = null;
+  let tasksCounted = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
   let userId = "b2fd8c39-0c75-4529-9ad6-68e1ae472bc4";
   const cookieStore = cookies();
@@ -21,7 +26,7 @@ export async function GET(request) {
 
   try {
     if (slug) {
-      const task = await prisma.task.findUnique({
+      task = await prisma.task.findUnique({
         where: {
           slug,
         },
@@ -38,6 +43,34 @@ export async function GET(request) {
       return NextResponse.json({ data: task, message: "Tasks fetched successfully" });
     }
 
+    if (limit=='dashboard') {
+      tasksLimited = await prisma.task.findMany({
+        where: {
+            userId,
+          },
+        take: 1,
+        include: {
+            user: {
+              select: {
+                username: true,
+                //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
+              },
+            },
+          },
+        });
+        return NextResponse.json({ data: tasksLimited, message: "Limited Tasks fetched successfully" });
+    } 
+
+    if (limit=='summary') {
+      tasksCounted = await prisma.$queryRaw(
+        Prisma.sql`SELECT COUNT(id) FROM task WHERE userId = ${userId}`
+      );
+      //console.log(tasksCounted);
+      return NextResponse.json({ data: tasksCounted, message: "Counted Tasks fetched successfully" });
+      //console.log('Average age:' + aggregations._avg.age)
+    }
+      
+    
     tasks = await prisma.task.findMany({
         where: {
             userId,

@@ -3,11 +3,14 @@
 import { Button, Input } from "@nextui-org/react";
 import React from "react";
 import toast from "react-hot-toast";
+import {Image} from "@nextui-org/react";
+import NextImage from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Register = () => {
   const router = useRouter();
-  
+
   async function handleRegister(event) {
     event.preventDefault(); // Ga akan nge refresh
     const firstName = event.target.firstName.value;
@@ -52,11 +55,24 @@ export const Register = () => {
     <div className="h-screen flex items-center justify-center">
       <div>
         <div className="my-8">
-          <h2>berlaku.id</h2>
+          <div className="flex justify-center mb-4">
+          <Link href="https://berlaku.id">
+            <Image
+              as={NextImage}
+              radius="none"
+              src="/berlakuid.png"
+              width={154}
+              height={30}
+              alt="berlaku.id Logo"
+            />
+            </Link>
+            </div>
+            <div className="mb-4">
           <p>Silahkan daftarkan akun Anda di berlaku.id</p>
+          </div>
         </div>
         <form onSubmit={handleRegister}>
-          <div className="space-y-2">
+          <div className="space-y-4">
             <div className="grid grid-cols-2 gap-2">
               <Input name="firstName" placeholder="First Name" />
               <Input name="lastName" placeholder="Last Name" />
@@ -69,6 +85,11 @@ export const Register = () => {
             </Button>
           </div>
         </form>
+        <Link href="login">
+          <div className="flex justify-center mt-4">
+            Login sekarang
+          </div>
+        </Link>
       </div>
     </div>
   );
