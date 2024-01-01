@@ -3,23 +3,20 @@ import prisma from "@/utils/prisma";
 //import { uploadFile } from "@/lib/uploadFile";
 import slugify from "slugify";
 import { verify } from "jsonwebtoken";
-import { getUser } from "@/components/auth/hooks/getUser";
+import Cookies from "js-cookie";
 
 export async function GET(request) {
-  const { user } = getUser();
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
   const limit = searchParams.get("limit");
   //console.log(searchParams);
-  console.log({user});
   
   let tasks = null;
   let task = null;
   let tasksLimited = null;
   let tasksCounted = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
-  let userId = null;
-  if(user) userId = {user.userId};
+  let userId = Cookies.get("userId");
   
   try {
     if (slug) {
