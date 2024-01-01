@@ -40,11 +40,23 @@ export async function POST(req) {
       username: findUser.username,
       email: findUser.email,
     };
-
+    
     // Buat token
     const token = sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
     const res = NextResponse.json({ data: payload, message: "Login succesfully" }, { status: 200 });
     res.cookies.set("token", token);
+    res.cookies.set("userId", payload.id);
+    res.cookies.set("firstName", payload.firstName);
+    res.cookies.set("lastName", payload.lastName);
+    res.cookies.set("username", payload.username);
+    /*if (typeof window !== 'undefined') {
+    localStorage.setItem("userId", payload.id);
+    }*/
+    /*localStorage.setItem("userNameFirst", payload.firstName);
+    localStorage.setItem("userNameLast", payload.lastName);
+    localStorage.setItem("userName", payload.username);
+    localStorage.setItem("email", payload.email);*/
+
 
     return res;
   } catch (error) {

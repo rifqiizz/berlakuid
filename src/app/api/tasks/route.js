@@ -3,27 +3,24 @@ import prisma from "@/utils/prisma";
 //import { uploadFile } from "@/lib/uploadFile";
 import slugify from "slugify";
 import { verify } from "jsonwebtoken";
-import { cookies } from "next/headers";
+import { getUser } from "@/components/auth/hooks/getUser";
 
 export async function GET(request) {
+  const { user } = getUser();
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
   const limit = searchParams.get("limit");
   //console.log(searchParams);
+  console.log({user});
   
   let tasks = null;
   let task = null;
   let tasksLimited = null;
   let tasksCounted = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
-  let userId = "b2fd8c39-0c75-4529-9ad6-68e1ae472bc4";
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
-  //console.log(token);
-  //const decoded = verify(token, process.env.JWT_SECRET);
-  //const userIdtoken = decoded.id;
-  //console.log(userIdtoken);
-
+  let userId = null;
+  if(user) userId = {user.userId};
+  
   try {
     if (slug) {
       task = await prisma.task.findUnique({
@@ -48,17 +45,9 @@ export async function GET(request) {
         where: {
             userId,
           },
-        take: 1,
-        include: {
-            user: {
-              select: {
-                username: true,
-                //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
-              },
-            },
-          },
+        take: 5,
         });
-        return NextResponse.json({ data: tasksLimited, message: "Limited Tasks fetched successfully" });
+        return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
     } 
 
     if (limit=='summary') {
@@ -75,24 +64,7 @@ export async function GET(request) {
         where: {
             userId,
           },
-        include: {
-            user: {
-              select: {
-                username: true,
-                //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
-              },
-            },
-          },
     });
-
-    // Get user id from token
-  /*const cookieStore = cookies();
-  const token = cookieStore.get("token").value;
-  const decoded = verify(token, process.env.JWT_SECRET);
-  const userId = decoded.id;
-
-  console.log("Mulai API Task");
-  console.log("user ID: ", userId); */
 
     return NextResponse.json({ data: tasks, message: "All Tasks fetched successfully" });
   } catch (error) {
