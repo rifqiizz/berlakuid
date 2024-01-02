@@ -1,15 +1,19 @@
 //import next request and response
 import { NextResponse } from "next/server";
-
 //import prisma client
 import prisma from "@/utils/prisma";
 
-export async function GET({ params }) {
+//export async function GET({ params }) {
   //get params id
-  const id = params.id;
+export async function GET(request) {
+  const searchParams = request.nextUrl.searchParams;
+  const id = searchParams.get("id");
+  //console.log(params);
+  //exit; 
+  //const id = params.id;
 
   //get detail post
-  const post = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id,
     },

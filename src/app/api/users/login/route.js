@@ -45,10 +45,10 @@ export async function POST(req) {
     const token = sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
     const res = NextResponse.json({ data: payload, message: "Login succesfully" }, { status: 200 });
     res.cookies.set("token", token);
-    res.cookies.set("userId", payload.id);
-    res.cookies.set("firstName", payload.firstName);
-    res.cookies.set("lastName", payload.lastName);
-    res.cookies.set("username", payload.username);
+    res.cookies.set("userId", payload.id, { domain: 'localhost' });
+    res.cookies.set("firstName", payload.firstName, { domain: 'localhost' });
+    res.cookies.set("lastName", payload.lastName, { domain: 'localhost' });
+    res.cookies.set("username", payload.username, { domain: 'localhost' });
     /*if (typeof window !== 'undefined') {
     localStorage.setItem("userId", payload.id);
     }*/

@@ -11,6 +11,7 @@ export const getUser = () => {
         'userId' : Cookies.get("userId"),
         'username' : Cookies.get("username")
     };
+    localStorage.setItem("userId", Cookies.get("userId"));
     //const userData = JSON.parse(localStorage.getItem("userdata"));
     setUser(userData);
   }, []);
