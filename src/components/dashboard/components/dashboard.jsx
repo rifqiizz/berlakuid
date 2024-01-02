@@ -22,6 +22,7 @@ async function getDataSummary() {
 export async function Dashboard() {
   const { data } = await getData();
   console.log(data);
+  const username = Cookies.get("username");
   //const { username } = Cookies.get("username",'');
   //const { dataSummary } = await getDataSummary();
 
@@ -48,7 +49,7 @@ export async function Dashboard() {
       <section className="">
         {data?.map((data) => {
           //return <CardItemList key={id} id={id} name={name} slug={slug} description={description} category={category} username={user.username} />;
-          return <CardItemList key={data.id} id={data.id} name={data.name} category={data.category} reminderOn={data.expiryDate} username={data.user.username} slug={data.slug} source='dashboard' />;
+          return <CardItemList key={data.id} id={data.id} name={data.name} category={data.category} reminderOn={data.expiryDate} username={username} slug={data.slug} source='dashboard' />;
           //return <div>{name} {category} {expiryDate} </div>;
         })}
       </section>
