@@ -5,10 +5,12 @@ import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
 import { Plus } from 'lucide-react';
 import { apiUrl } from "@/config/apiUrl";
+import Cookies from "js-cookie";
 
 async function getData() {
   const res = await fetch(`${ apiUrl }/tasks?limit=dashboard`);
   const data = await res.json();
+  //console.log(data);
   return data;
 }
 
@@ -20,6 +22,8 @@ async function getDataSummary() {
 
 export async function Dashboard () {
   const { data } = await getData();
+  console.log(data);
+  //const { username } = Cookies.get("username",'');
   //const { dataSummary } = await getDataSummary();
 
   return (
@@ -46,7 +50,7 @@ export async function Dashboard () {
       <section className="">
         {data?.map((data) => {
           //return <CardItemList key={id} id={id} name={name} slug={slug} description={description} category={category} username={user.username} />;
-          return <CardItemList key={data.id} id={data.id} name={data.name} category={data.category} reminderOn={data.expiryDate} username={data.user.username} slug={data.slug} source='dashboard' />;
+          return <CardItemList key={data.id} id={data.id} name={data.name} category={data.category} reminderOn={data.expiryDate} slug={data.slug} source='dashboard' />;
           //return <div>{name} {category} {expiryDate} </div>;
         })}
       </section>

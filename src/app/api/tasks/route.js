@@ -42,6 +42,14 @@ export async function GET(request) {
         where: {
             userId,
           },
+          include: {
+            user: {
+                select: {
+                  username: true,
+                  //userId: userId,
+                },
+              },
+        },
         take: 5,
         });
         return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
@@ -61,6 +69,14 @@ export async function GET(request) {
         where: {
             userId,
           },
+          include: {
+            user: {
+              select: {
+                username: true,
+                //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
+              },
+            },
+          },  
     });
 
     return NextResponse.json({ data: tasks, message: "All Tasks fetched successfully" });

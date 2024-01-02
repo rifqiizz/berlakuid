@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
+import Cookies from "js-cookie";
 
 //"/detail-reminder"
 
-const CardItemList = ({key,id,name,category,reminderOn,username,slug,source}) => {
+const CardItemList = ({key,id,name,category,reminderOn,slug,source}) => {
+  const username = Cookies.get("username");
+
   return (
     <div className='card-item-list' id={key}>
       <Link href={`/${username}/${slug}`}>

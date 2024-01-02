@@ -1,7 +1,10 @@
+'use client'
+
 import { apiUrl, imageUrl } from "@/config/apiUrl";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
+import { deleteTask } from "@/components/dashboard/hooks/deleteTask";
 
 async function getData(taskSlug) {
   const res = await fetch(`${apiUrl}/tasks?slug=${taskSlug}`);
@@ -11,6 +14,7 @@ async function getData(taskSlug) {
 
 export default async function Page({ params }) {
   const { username, taskSlug } = params;
+  const { loading, handleDelete } = deleteTask;
   const { data } = await getData(taskSlug);
 
   return (
@@ -47,7 +51,7 @@ export default async function Page({ params }) {
                 <Button color="secondary">
                     Sunting
                 </Button> 
-                <Button color="danger">
+                <Button color="danger" onClick={handleDelete}>
                     Hapus
                 </Button> 
             </div>
