@@ -20,30 +20,9 @@ export async function GET(request) {
   });
 
   if (!user) {
-    //return response JSON
-    return NextResponse.json(
-      {
-        sucess: true,
-        message: "Detail Data User Not Found!",
-        data: null,
-      },
-      {
-        status: 404,
-      }
-    );
+    return NextResponse.json({ error: "Error fetching categories" });
   }
-
-  //return response JSON
-  return NextResponse.json(
-    {
-      sucess: true,
-      message: "Detail Data User",
-      data: user,
-    },
-    {
-      status: 200,
-    }
-  );
+  return NextResponse.json({ data: user, message: "Category fetched successfully" });
 }
 
 export async function PATCH(request, { params }) {

@@ -10,11 +10,8 @@ import { apiUrl } from "@/config/apiUrl";
 //import { getUser } from "@/components/auth/hooks/getUser";
 
 async function getData(id) {
-  //console.log('id: ',id);
-  //console.log('{id}: ',{id});
   const res = await fetch(`${apiUrl}/users?id=${id}`);
   const data = await res.json();
-  //console.log(data);
   return data;
 }
 
@@ -30,13 +27,13 @@ export async function Profile() {
   let userId = Cookies.get("userId");
   if(!userId) userId = 'b2fd8c39-0c75-4529-9ad6-68e1ae472bc4';
   //console.log('userId : ',userId);
-  let dataUser = await getData( userId );
-  //console.log(dataUser.data);
-  let first = dataUser.data.firstName;
-  let last = dataUser.data.lastName;
-  let username = dataUser.data.username;
-  let email = dataUser.data.email;
-  let joinDate = dataUser.data.createdAt;
+  const dataUser = await getData( userId );
+  console.log(dataUser.data);
+  const first = dataUser.data.firstName;
+  const last = dataUser.data.lastName;
+  const username = dataUser.data.username;
+  const email = dataUser.data.email;
+  const joinDate = dataUser.data.createdAt;
 
   return (
     <main className="space-y-8">
