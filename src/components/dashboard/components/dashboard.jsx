@@ -7,6 +7,7 @@ import { apiUrl } from "@/config/apiUrl";
 import Cookies from "js-cookie";
 
 import { cookies } from 'next/headers'
+import Link from "next/link";
 
 async function getData() {
   const res = await fetch(`${apiUrl}/tasks?limit=dashboard`);
@@ -24,10 +25,10 @@ async function getDataSummary() {
 export async function Dashboard() {
   const { data } = await getData();
   console.log(data);
-  //const username = Cookies.get("username");
-  const cookieStore = cookies();
+  const username = Cookies.get("username");
+  /*const cookieStore = cookies();
   const user = cookieStore.get('username');
-  const username = user.value;
+  const username = user.value;*/
   
   
   //const { username } = Cookies.get("username",'');
@@ -50,8 +51,9 @@ export async function Dashboard() {
         <div className="basis-4/12">Berlaku s/d</div>
       </section>
       <Button className="btn-main btn-add">
-        <Plus />
-        Buat Task Baru
+        <Link href="/add-task" className="flex items-center">
+          <Plus /> <span className="ml-2">Buat Task Baru</span>
+        </Link>
       </Button>
       <section className="">
         {data?.map((data) => {

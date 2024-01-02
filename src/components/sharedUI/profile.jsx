@@ -7,7 +7,7 @@ import { getUser } from "@/components/auth/hooks/getUser";
 const Profile = () => {
   const { user } = getUser();
   const { loading, handleLogout } = runLogout();
-  console.log(user);
+  
   //console.log({user});
   //let userId = localStorage.getItem("userId");//Cookies.get("userId");
   //if(!userId) userId = '17b5d749-75bd-4d97-8f82-7b7fd272bfa4';

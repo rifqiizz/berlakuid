@@ -1,10 +1,10 @@
-import DetailReminder from '@/components/dashboard/components/detailReminder';
+import AddTaskForm from '@/components/dashboard/components/addTaskForm';
 import React from 'react';
 
 const Page = () => {
   return (
     <div>
-      <DetailReminder/>
+      <AddTaskForm/>
     </div>
   );
 }
