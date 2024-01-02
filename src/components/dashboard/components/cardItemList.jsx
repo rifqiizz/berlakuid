@@ -4,8 +4,9 @@ import Cookies from "js-cookie";
 
 //"/detail-reminder"
 
-const CardItemList = ({key,id,name,category,reminderOn,slug,source}) => {
-  const username = Cookies.get("username");
+const CardItemList = ({key,id,name,category,reminderOn,username,slug,source}) => {
+  //const username = Cookies.get("username");
+  //console.log(username);
 
   return (
     <div className='card-item-list' id={key}>

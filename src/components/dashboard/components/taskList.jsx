@@ -39,7 +39,7 @@ export async function TaskList() {
               name={data.name}
               category={data.category}
               reminderOn={data.expiryDate}
-              username="adminnytehub"
+              username={data.user.username}
               slug={data.slug}
               source="list-task"
             />
