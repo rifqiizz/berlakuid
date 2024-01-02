@@ -1,4 +1,4 @@
-import { Profile } from "@/components/profile/components/Profile";
+import { User } from "@/components/profile/components/User";
 import { Header } from "@/components/sharedUI/header";
 
 export default function Page () {
@@ -9,7 +9,7 @@ export default function Page () {
         
       </div>
       <div className="box-white-outer">
-        <div className="max-w-6xl m-auto py-5"><Profile /></div>
+        <div className="max-w-6xl m-auto py-5"><User /></div>
       </div>
     
     </main>

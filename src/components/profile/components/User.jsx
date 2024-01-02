@@ -10,12 +10,12 @@ import { apiUrl } from "@/config/apiUrl";
 //import { getUser } from "@/components/auth/hooks/getUser";
 
 async function getData(id) {
-  const res = await fetch(`${apiUrl}/users?id=${id}`);
+  const res = await fetch(`${apiUrl}/users?slug=${id}`);
   const data = await res.json();
   return data;
 }
 
-export async function Profile() {
+export async function User() {
 //const Profile = () => {
   //const { user } = getUser();
   //console.log({user});
@@ -96,5 +96,4 @@ export async function Profile() {
       </section>
     </main>
   );
-};
-
+}
