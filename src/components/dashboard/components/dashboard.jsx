@@ -6,6 +6,8 @@ import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
 import Cookies from "js-cookie";
 
+import { cookies } from 'next/headers'
+
 async function getData() {
   const res = await fetch(`${apiUrl}/tasks?limit=dashboard`);
   const data = await res.json();
@@ -22,7 +24,12 @@ async function getDataSummary() {
 export async function Dashboard() {
   const { data } = await getData();
   console.log(data);
-  const username = Cookies.get("username");
+  //const username = Cookies.get("username");
+  const cookieStore = cookies();
+  const user = cookieStore.get('username');
+  const username = user.value;
+  
+  
   //const { username } = Cookies.get("username",'');
   //const { dataSummary } = await getDataSummary();
 
