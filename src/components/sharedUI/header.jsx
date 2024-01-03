@@ -31,8 +31,8 @@ export const Header = () => {
         <Link href="/dashboard">
           <div>Dashboard</div>
         </Link>
-        <Link href="https://berlaku.id">
-          <div>Tentang</div>
+        <Link href="/category">
+          <div>Kategori</div>
         </Link>
         
         <Dropdown>
