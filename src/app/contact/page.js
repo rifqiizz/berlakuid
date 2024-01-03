@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, { useState } from "react";
 
 const MailSignUp = () => {
@@ -20,10 +21,7 @@ const MailSignUp = () => {
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen">
-        <form
-          className="flex items-center w-full max-w-md mx-auto"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex items-center w-full max-w-md mx-auto" onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="Email"
@@ -31,10 +29,7 @@ const MailSignUp = () => {
             onChange={(e) => setMail(e.target.value)}
             value={mail}
           />
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold h-12 px-4 rounded-r-md "
-            type="submit"
-          >
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold h-12 px-4 rounded-r-md " type="submit">
             SignUp
           </button>
         </form>
