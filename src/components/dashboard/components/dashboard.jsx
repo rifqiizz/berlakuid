@@ -4,7 +4,7 @@ import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
 import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
-import Cookies from "js-cookie";
+import { cookies } from "next/headers";
 
 import { cookies } from 'next/headers'
 import Link from "next/link";
@@ -12,27 +12,12 @@ import Link from "next/link";
 async function getData() {
   const res = await fetch(`${apiUrl}/tasks?limit=dashboard`);
   const data = await res.json();
-  //console.log(data);
   return data;
-}
-
-async function getDataSummary() {
-  //const res = await fetch(`${ apiUrl }/tasks?limit=summary`);
-  //const data = await res.json();
-  //return data;
 }
 
 export async function Dashboard() {
   const { data } = await getData();
-  console.log(data);
-  const username = Cookies.get("username");
-  /*const cookieStore = cookies();
-  const user = cookieStore.get('username');
-  const username = user.value;*/
-  
-  
-  //const { username } = Cookies.get("username",'');
-  //const { dataSummary } = await getDataSummary();
+  const username = cookies().get("username")?.value;
 
   return (
     <main className="space-y-8">
@@ -57,9 +42,18 @@ export async function Dashboard() {
       </Button>
       <section className="">
         {data?.map((data) => {
-          //return <CardItemList key={id} id={id} name={name} slug={slug} description={description} category={category} username={user.username} />;
-          return <CardItemList key={data.id} id={data.id} name={data.name} category={data.category} reminderOn={data.expiryDate} username={username} slug={data.slug} source='dashboard' />;
-          //return <div>{name} {category} {expiryDate} </div>;
+          return (
+            <CardItemList
+              key={data.id}
+              id={data.id}
+              name={data.name}
+              category={data.category}
+              reminderOn={data.expiryDate}
+              username={username}
+              slug={data.slug}
+              source="dashboard"
+            />
+          );
         })}
       </section>
     </main>

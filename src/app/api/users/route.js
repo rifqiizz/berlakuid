@@ -7,22 +7,28 @@ import prisma from "@/utils/prisma";
   //get params id
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("id");
-  //console.log(params);
-  //exit; 
-  //const id = params.id;
+  const id = searchParams.get("slug");
+  
+  let user = null;
+  try {
+    if (id) {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
 
-  //get detail post
-  const user = await prisma.user.findUnique({
-    where: {
-      id,
-    },
-  });
+      return NextResponse.json({ data: user, message: "User information fetched successfully" });
+    }
 
-  if (!user) {
-    return NextResponse.json({ error: "Error fetching categories" });
-  }
-  return NextResponse.json({ data: user, message: "Category fetched successfully" });
+    users = await prisma.user.findMany({
+      
+    });
+    return NextResponse.json({ data: users, message: "All Users fetched successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Error fetching users" });
+  } 
 }
 
 export async function PATCH(request, { params }) {
