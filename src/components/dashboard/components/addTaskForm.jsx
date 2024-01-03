@@ -39,13 +39,14 @@ async function AddTaskForm() {
       <section>
         <div className='box-middle reminder-details'>
           <Input type="text" label="Nama Pengingat" />
-          <Select label="Pilih Kategory" className="">
+          {/*<Select label="Pilih Kategory" className="">
             {dataCategory?.map((category) => (
               <SelectItem key={category.value} value={category.value}>
                 {category.label}
               </SelectItem>
             ))}
-          </Select>
+            </Select>*/}
+          <Input type="text" label="Kategori" />
           <Input type="text" label="Deskripsi" />
           <Input type="number" label="Reminder Sebelum ... hari" />
           <Input type="date" label="Tanggal Kedaluarsa" />
