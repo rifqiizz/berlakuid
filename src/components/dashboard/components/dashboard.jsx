@@ -5,8 +5,6 @@ import CardItemList from "./cardItemList";
 import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
 import { cookies } from "next/headers";
-
-import { cookies } from 'next/headers'
 import Link from "next/link";
 
 async function getData() {

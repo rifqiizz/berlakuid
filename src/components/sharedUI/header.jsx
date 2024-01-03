@@ -48,7 +48,7 @@ export const Header = () => {
               </Link>
             </DropdownItem>
             <DropdownItem key="new">
-              <Link href="/new-task">
+              <Link href="/add-task">
                 <div>Buat Baru</div>
               </Link>
             </DropdownItem>
