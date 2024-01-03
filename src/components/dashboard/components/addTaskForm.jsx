@@ -3,7 +3,6 @@ import { Button, Input } from "@nextui-org/react";
 import { useState, useEffect } from 'react';
 import { apiUrl } from "@/config/apiUrl";
 import toast from "react-hot-toast";
-import Cookies from 'js-cookie';
 import { exportCategory } from "../hooks/exportCategory.";
 
 
@@ -11,7 +10,13 @@ import { exportCategory } from "../hooks/exportCategory.";
 function AddTaskForm() {
  
   const [categories, setCategories] = useState([]); 
+  const [selectedCategory, setSelectedCategory] = useState('')
+  
 
+
+  function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value); 
+  }
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -26,49 +31,61 @@ function AddTaskForm() {
 
     fetchCategories();
   }, []);
-
-  const userId = Cookies.get('userId');
-
   async function handleAddTask(event) {
-    
+    event.preventDefault(); // Ga akan nge refresh
+    const formData = new FormData();
+
     const name = event.target.name.value;
-    const category = event.target.category.value;
     const description = event.target.description.value;
     const dayReminder = event.target.dayReminder.value;
     const expiryDate = event.target.expiryDate.value;
-    console.log(name);
-    console.log(category);
-    console.log(description);
-    console.log(dayReminder);
-    console.log(expiryDate);
-    console.log(userId);
 
-    /*const res = await fetch("/api/tasks/", {
-      method: "POST",
-      body: JSON.stringify({
-          name,
-          slug: slugify(name, { lower: true, replacement: '-' }),
-          description,
-          dayReminder: Number(dayReminder),
-          category,
-          expiryDate,
-          userId, 
-          createdAt: new Date().toISOString(), 
-        }),
-    });
-    const { message, errorMessage } = await res.json();
+    const dateObject = new Date(expiryDate);
+    const isoFormattedDate = dateObject.toISOString();
 
-    if (errorMessage) {
-      console.log(errorMessage);
-      toast.error("Error!");
-      return;
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('dayReminder', dayReminder);
+    formData.append('expiryDate', isoFormattedDate);
+    formData.append('category', selectedCategory);
+    formData.append('featuredImage', name);
+    /*console.log('Name:', name);
+    console.log('Category:', selectedCategory);
+    console.log('Description:', description);
+    console.log('Day Reminder:', dayReminder);
+    console.log('Expiry Date:', expiryDate);
+    console.log('userId', userId);*/
+
+    try {
+      const res = await fetch("/api/tasks/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok.');
+      }
+
+      const { message, errorMessage } = await res.json();
+      
+      if (errorMessage) {
+        console.log(errorMessage);
+        toast.error(errorMessage);
+        return;
+      }
+
+      console.log(message);
+      toast.success(message);
+      
+    } catch (error) {
+      console.error('Error:', error.message);
+      toast.error(error.message);
     }
 
-    console.log(message);
-    toast.success("Pengingat berhasil ditambahkan.");
-    */
+   
+    
   }
-
+  
   return (
     <main className="space-y-8">
       <section>
@@ -79,7 +96,7 @@ function AddTaskForm() {
         <div className='box-middle reminder-details add-form'>
           <form onSubmit={handleAddTask}>
             <Input name="name" variant="underlined" label="Nama Pengingat" />
-            <select>
+            <select onChange={handleCategoryChange} value={selectedCategory}>
             
               {categories?.map((category) => (
                 <option key={category.id} value={category.name}>
@@ -94,7 +111,7 @@ function AddTaskForm() {
             <Input name="dayReminder" variant="underlined" label="Reminder Sebelum ... hari" />
             <Input name="expiryDate" className="datepicker" type="date" variant="underlined" label="Tanggal Kedaluarsa" />
             <div className='button-holder flex justify-between mt-8'>
-              <Button color="primary">
+              <Button type="submit" color="primary">
                 Simpan
               </Button>
             </div>

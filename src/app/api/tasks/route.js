@@ -3,7 +3,7 @@ import prisma from "@/utils/prisma";
 //import { uploadFile } from "@/lib/uploadFile";
 import slugify from "slugify";
 import { verify } from "jsonwebtoken";
-import Cookies from "js-cookie";
+import { cookies } from 'next/headers'
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
@@ -50,7 +50,7 @@ export async function GET(request) {
                 },
               },
         },
-        take: 5,
+        take: 6,
         });
         return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
     } 
@@ -93,12 +93,15 @@ export async function POST(request) {
     const description = formData.get("description");
     const dayReminder = formData.get("dayReminder");
     const expiryDate = formData.get("expiryDate");
-    //const featuredImage = formData.get("featuredImage");
+    const featuredImage = formData.get("featuredImage");
     const category = formData.get("category");
   
     // Get user id from token
     const cookieStore = cookies();
+    //const token = Cookies.get("token");
+    //console.log(token);
     const token = cookieStore.get("token").value;
+    //console.log(token);
     const decoded = verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
   
@@ -112,11 +115,11 @@ export async function POST(request) {
           slug: slugify(name, { lower: true, replacement: "-" }),
           description,
           dayReminder: Number(dayReminder),
-          //featuredImage: featuredImage.name,
           category,
           expiryDate,
           userId,
           createdAt: new Date(),
+          featuredImage: formData.get("featuredImage") || null
         },
       });
   
