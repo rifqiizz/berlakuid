@@ -4,8 +4,9 @@ const CardCounter = ({ item, text }) => {
   
   return (
     <div className="card-counter">
-      <h6>{text}</h6>
+     
       <h1>{item}</h1>
+      <h6>{text}</h6>
     </div>
   );
 }

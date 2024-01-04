@@ -18,7 +18,9 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
   const formattedReminderDate = reminderDate.toLocaleDateString('id-ID', options);
 
   
-  
+  const hasReminderPassed = reminderTime < Date.now();
+
+
   
  
   
@@ -31,7 +33,15 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
           <div className="hidden">{id}</div>
           <div className="md:basis-1/2 basis-full name-task">{name}</div>
           <div className="md:basis-2/12 basis-full first-letter:cat-task">{category}</div>
-          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">Pengingat pada: {formattedReminderDate}
+          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">{hasReminderPassed ? (
+            <div><span style={{ textDecoration: 'line-through' }}>
+              Pengingat pada: {formattedReminderDate}
+            </span> <i>SUDAH LEWAT</i></div>
+          ) : (
+            <span>
+              Pengingat pada: {formattedReminderDate}
+            </span>
+          )}
           </span></div>
         </div>
       </Link>
