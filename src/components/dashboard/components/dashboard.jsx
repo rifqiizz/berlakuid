@@ -5,6 +5,7 @@ import CardItemList from "./cardItemList";
 import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 async function getData() {
   const res = await fetch(`${apiUrl}/tasks?limit=dashboard`);
@@ -33,8 +34,9 @@ export async function Dashboard() {
         <div className="basis-4/12">Berlaku s/d</div>
       </section>
       <Button className="btn-main btn-add">
-        <Plus />
-        Buat Task Baru
+        <Link href="/add-task" className="flex items-center">
+          <Plus /> <span className="ml-2">Buat Task Baru</span>
+        </Link>
       </Button>
       <section className="">
         {data?.map((data) => {

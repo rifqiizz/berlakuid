@@ -12,7 +12,8 @@ export const runLogout = () => {
   async function handleLogout() {
     setLoading(true);
     Cookies.set("token",'');
-    Cookies.set("userId",'');
+    Cookies.set("userId", '');
+    Cookies.set("username",'');
     //localStorage.removeItem("userdata");
 
     let valToken = Cookies.get("token");

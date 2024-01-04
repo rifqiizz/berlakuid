@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const CardItemList = ({ id, name, category, reminderOn, username, slug, source }) => {
+
   return (
     <div className="card-item-list">
       <Link href={`/${username}/${slug}`}>

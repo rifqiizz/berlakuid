@@ -78,6 +78,17 @@
   .label {
     font-weight: bold;
   }
+  .add-form select{
+    width: 100%;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    font-size: 15px;
+    color: #73737c;
+  }
+  .datepicker label{
+    margin-top:-20px
+  }
   @media(max-width:767px){
     .mobile-hide{
       display: none;
