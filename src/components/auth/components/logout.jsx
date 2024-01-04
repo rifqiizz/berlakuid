@@ -7,21 +7,22 @@
 // export const Logout = () => {
 //   const router = useRouter();
 
-//   async function handleLogout() {
-//     Cookies.set("token",'');
-//     Cookies.set("userId",'');
-//     localStorage.removeItem("userdata");
+  async function handleLogout() {
+    let valToken = Cookies.get("token");
+    console.log(valToken);
 
-//     let valToken = Cookies.get("token");
+    Cookies.set("token",'');
+    Cookies.set("userId",'');
+    localStorage.removeItem("userdata");
 
-//     if (!(typeof valToken === "string" && valToken.length === 0)) {
-//       toast.error("Error logout!");
-//       return;
-//     }
+    if (!(typeof valToken === "string" && valToken.length === 0)) {
+      toast.error("Error logout!");
+      return;
+    }
 
-//     console.log(message);
-//     toast.success("Logout succesfully, redirecting...");
-//     router.push("/");
-//   }
+    console.log(message);
+    toast.success("Logout succesfully, redirecting...");
+    router.push("/login");
+  }
 
 // };

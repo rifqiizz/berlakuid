@@ -1,45 +1,35 @@
 //import next request and response
 import { NextResponse } from "next/server";
-
 //import prisma client
 import prisma from "@/utils/prisma";
+import { cookies } from 'next/headers';
 
-export async function GET(request, { params }) {
+//export async function GET({ params }) {
   //get params id
-  const id = params.id;
+export async function GET(request) {
+  const searchParams = request.nextUrl.searchParams;
+  const id = searchParams.get("id");
+  
+  let user = null;
+  try {
+    if (id) {
+      const user = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
 
-  //get detail post
-  const post = await prisma.task.findUnique({
-    where: {
-      id,
-    },
-  });
-
-  if (!task) {
-    //return response JSON
-    return NextResponse.json(
-      {
-        sucess: true,
-        message: "Detail Data Task Not Found!",
-        data: null,
-      },
-      {
-        status: 404,
-      }
-    );
-  }
-
-  //return response JSON
-  return NextResponse.json(
-    {
-      sucess: true,
-      message: "Detail Data Task",
-      data: task,
-    },
-    {
-      status: 200,
+      return NextResponse.json({ data: user, message: "User information fetched successfully" });
     }
-  );
+
+    users = await prisma.user.findMany({
+      
+    });
+    return NextResponse.json({ data: users, message: "All Users fetched successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: "Error fetching users" });
+  } 
 }
 
 export async function PATCH(request, { params }) {
@@ -50,7 +40,7 @@ export async function PATCH(request, { params }) {
   const { name, description } = await request.json();
 
   //update data
-  const post = await prisma.task.update({
+  const post = await prisma.user.update({
     where: {
       id,
     },
@@ -65,8 +55,8 @@ export async function PATCH(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Updated!",
-      data: task,
+      message: "Data User Updated!",
+      data: user,
     },
     {
       status: 200,
@@ -79,7 +69,7 @@ export async function DELETE(request, { params }) {
   const id = params.id;
 
   //delete data
-  await prisma.task.delete({
+  await prisma.user.delete({
     where: {
       id,
     },
@@ -89,7 +79,7 @@ export async function DELETE(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Deleted!",
+      message: "Data User Deleted!",
     },
     {
       status: 200,

@@ -4,32 +4,23 @@ import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
 import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
-import { cookies } from "next/headers";
-import Link from "next/link";
 
 async function getData() {
-  const res = await fetch(`${apiUrl}/tasks?limit=dashboard`, {
+  const res = await fetch(`${apiUrl}/tasks`, {
     cache: "no-store",
   });
   const data = await res.json();
   return data;
 }
 
-export async function Dashboard() {
+export async function TaskList() {
   const { data } = await getData();
-  let username = null;
-  username = cookies().get("username")?.value;
 
   return (
     <main className="space-y-8">
       <section>
-        <h2>Dashboard</h2>
-        <p>Pantau ringkasan masa berlaku yang sudah kamu simpan di sini.</p>
-      </section>
-      <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
-        <CardCounter item="24" text="Total Pengingat" />
-        <CardCounter item="6" text="Segera dalam bulan ini" />
-        <CardCounter item="8" text="Segera pada pekan depan" />
+        <h2>Daftar Task</h2>
+        <p>Daftar lengkap masa berlaku yang sudah kamu buat di sini.</p>
       </section>
       <section className="mobile-hide flex font-bold px-5">
         <div className="basis-1/2">Nama</div>
@@ -37,12 +28,12 @@ export async function Dashboard() {
         <div className="basis-4/12">Berlaku s/d</div>
       </section>
       <Button className="btn-main btn-add">
-        <Link href="/add-task" className="flex items-center">
-          <Plus /> <span className="ml-2">Buat Task Baru</span>
-        </Link>
+        <Plus />
+        Buat Task Baru
       </Button>
       <section className="">
         {data?.map((data) => {
+          //return <CardItemList key={id} id={id} name={name} slug={slug} description={description} category={category} username={user.username} />;
           return (
             <CardItemList
               key={data.id}
@@ -52,9 +43,10 @@ export async function Dashboard() {
               reminderOn={data.expiryDate}
               username={data.user.username}
               slug={data.slug}
-              source="dashboard"
+              source="list-task"
             />
           );
+          //return <div>{name} {category} {expiryDate} </div>;
         })}
       </section>
     </main>
