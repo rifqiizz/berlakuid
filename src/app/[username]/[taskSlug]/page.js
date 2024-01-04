@@ -17,6 +17,22 @@ export default async function Page({ params }) {
   const { loading, handleDelete } = deleteTask;
   const { data } = await getData(taskSlug);
 
+  const expiryDate = data.expiryDate;
+  const dayReminder = data.dayReminder;
+
+  const date = new Date(expiryDate);
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = date.toLocaleDateString('id-ID', options);
+
+  //reminder date
+  const expiryTime = Date.parse(expiryDate);
+  const reminderTime = expiryTime - dayReminder * 24 * 60 * 60 * 1000;
+  const reminderDate = new Date(reminderTime);
+
+  
+  const formattedReminderDate = reminderDate.toLocaleDateString('id-ID', options);
+
   return (
     <main className="space-y-12">
       <section>
@@ -36,7 +52,7 @@ export default async function Page({ params }) {
           </div>
           <div className="detail">
             <span className="label">Expired Date:</span>
-            <span className="value">{data.expiryDate}</span>
+            <span className="value">{formattedDate}</span>
           </div>
           <div className="detail">
             <span className="label">Date Reminder Before:</span>
@@ -44,7 +60,7 @@ export default async function Page({ params }) {
           </div>
           <div className="detail">
             <span className="label">Reminder On:</span>
-            <span className="value">soon under development</span>
+            <span className="value">{formattedReminderDate}</span>
           </div>
           <div className='button-holder flex justify-between'>
             <div className="flex justify-start gap-4">
