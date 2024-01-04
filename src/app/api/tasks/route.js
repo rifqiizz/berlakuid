@@ -3,7 +3,7 @@ import prisma from "@/utils/prisma";
 //import { uploadFile } from "@/lib/uploadFile";
 import slugify from "slugify";
 import { verify } from "jsonwebtoken";
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
@@ -16,7 +16,9 @@ export async function GET(request) {
   let tasksLimited = null;
   let tasksCounted = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
-  let userId = Cookies.get("userId");
+  const userId = cookies().get("userId")?.value;
+  //console.log(userId);
+  //let userId = Cookies.get("userId");
   
   try {
     if (slug) {
@@ -50,7 +52,10 @@ export async function GET(request) {
                 },
               },
         },
-        take: 6,
+        take: 5,
+        orderBy: {
+          createdAt: 'desc',
+        },
         });
         return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
     } 
@@ -71,12 +76,15 @@ export async function GET(request) {
           },
           include: {
             user: {
-              select: {
-                username: true,
-                //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
-              },
-            },
-          },  
+          //     /*select: {
+          //       username: true,
+          //       //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
+          //     },*/
+               select: {
+                 username: true,
+               },
+             },
+           },  
     });
 
     return NextResponse.json({ data: tasks, message: "All Tasks fetched successfully" });

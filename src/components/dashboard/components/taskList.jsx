@@ -6,7 +6,9 @@ import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
 
 async function getData() {
-  const res = await fetch(`${apiUrl}/tasks`);
+  const res = await fetch(`${apiUrl}/tasks`, {
+    cache: "no-store",
+  });
   const data = await res.json();
   return data;
 }

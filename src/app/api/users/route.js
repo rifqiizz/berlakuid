@@ -2,12 +2,13 @@
 import { NextResponse } from "next/server";
 //import prisma client
 import prisma from "@/utils/prisma";
+import { cookies } from 'next/headers';
 
 //export async function GET({ params }) {
   //get params id
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("slug");
+  const id = searchParams.get("id");
   
   let user = null;
   try {

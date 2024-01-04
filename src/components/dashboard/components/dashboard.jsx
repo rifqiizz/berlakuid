@@ -8,14 +8,17 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch(`${apiUrl}/tasks?limit=dashboard`);
+  const res = await fetch(`${apiUrl}/tasks?limit=dashboard`, {
+    cache: "no-store",
+  });
   const data = await res.json();
   return data;
 }
 
 export async function Dashboard() {
   const { data } = await getData();
-  const username = cookies().get("username")?.value;
+  let username = null;
+  username = cookies().get("username")?.value;
 
   return (
     <main className="space-y-8">
@@ -47,7 +50,7 @@ export async function Dashboard() {
               name={data.name}
               category={data.category}
               reminderOn={data.expiryDate}
-              username={username}
+              username={data.user.username}
               slug={data.slug}
               source="dashboard"
             />

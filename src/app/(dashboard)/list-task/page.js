@@ -1,5 +1,4 @@
-import { Header } from "@/components/sharedUI/header";
-import { Dashboard, TaskList } from "@/components/dashboard/components/taskList";
+import { TaskList } from "@/components/dashboard/components/taskList";
 
 
 export default function Page() {

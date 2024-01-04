@@ -6,7 +6,7 @@ import { apiUrl } from "@/config/apiUrl";
 import { Button, Input } from "@nextui-org/react";
 
 async function getData(id) {
-  const res = await fetch(`${apiUrl}/users?slug=${id}`, {
+  const res = await fetch(`${apiUrl}/users?id=${id}`, {
     cache: "no-store",
   });
   const data = await res.json();
