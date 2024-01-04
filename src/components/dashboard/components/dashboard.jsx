@@ -12,11 +12,15 @@ async function getData() {
     cache: "no-store",
   });
   const data = await res.json();
+  
+
   return data;
 }
 
 export async function Dashboard() {
   const { data } = await getData();
+  //console.log(data);
+  const total = data.length;
   let username = null;
   username = cookies().get("username")?.value;
 
@@ -27,7 +31,7 @@ export async function Dashboard() {
         <p>Pantau ringkasan masa berlaku yang sudah kamu simpan di sini.</p>
       </section>
       <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
-        <CardCounter item="24" text="Total Pengingat" />
+        <CardCounter item={total} text="Total Pengingat" />
         <CardCounter item="6" text="Segera dalam bulan ini" />
         <CardCounter item="8" text="Segera pada pekan depan" />
       </section>
