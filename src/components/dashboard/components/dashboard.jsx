@@ -53,7 +53,8 @@ export async function Dashboard() {
               id={data.id}
               name={data.name}
               category={data.category}
-              reminderOn={data.expiryDate}
+              expiryDate={data.expiryDate}
+              dayReminder={data.dayReminder}
               username={data.user.username}
               slug={data.slug}
               source="dashboard"

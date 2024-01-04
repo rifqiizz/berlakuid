@@ -89,6 +89,9 @@
   .datepicker label{
     margin-top:-20px
   }
+  .font-12{
+    font-size: 12px;
+  }
   @media(max-width:767px){
     .mobile-hide{
       display: none;
