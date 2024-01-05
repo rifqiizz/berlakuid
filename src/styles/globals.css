@@ -28,7 +28,7 @@
     @apply w-full flex gap-4 cursor-pointer items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition duration-300;
   }
   .box-white-outer{
-    @apply bg-white h-[85%];
+    @apply bg-transparent h-[85%];
     border-radius: 50px 50px 0 0;
   
   }
@@ -92,9 +92,40 @@
   .font-12{
     font-size: 12px;
   }
+  .border-right-login{
+    border-right:2px solid #E2E8F0
+  }
+  .padding-4-rem{
+    padding:0 4rem;
+  }
+  .box-login{
+    @apply w-[100%];
+    background-color: rgb(81 142 203 / 50%);
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 2px #00000040;
+  }
+  .box-login input,.box-login input::placeholder{
+    color:#ffffff !important
+  }
+  
   @media(max-width:767px){
     .mobile-hide{
-      display: none;
+      display: none !important;
+    }
+    .p-0-mob{
+      padding:0
+    }
+    .padding-2-rem-mob {
+        padding: 0 2rem;
+    }
+    .box-login{
+      padding:32px
+    }
+    .box-white-outer{
+      @apply bg-white h-[85%];
+      border-radius: 50px 50px 0 0;
+    
     }
 
   }

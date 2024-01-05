@@ -87,8 +87,8 @@ export async function Dashboard() {
       </section>
       <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
         <CardCounter item={total} text="Total Pengingat" />
-        <CardCounter item={numberOfItemsInCurrentMonth} text="Segera dalam bulan ini" />
-        <CardCounter item={numberOfItemsInFollowingWeek} text="Segera pada pekan depan" />
+        <CardCounter item={numberOfItemsInCurrentMonth} text="Pengingat dalam bulan ini" />
+        <CardCounter item={numberOfItemsInFollowingWeek} text="Pengingat pada pekan depan" />
       </section>
       <section className="mobile-hide flex font-bold px-5">
         <div className="basis-1/2">Nama</div>

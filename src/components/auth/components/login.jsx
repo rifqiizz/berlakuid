@@ -34,45 +34,26 @@ export const Login = () => {
   }
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div className="px-8">
-        <Image
-          width={500}
-          alt="NextUI hero Image"
-          src="/hero-berlakuid.png"
-        />
-      </div>
-      <div className="">
-      <div className="flex justify-center mb-4">
-      <Link href="https://berlaku.id">
-        <Image
-          as={NextImage}
-          radius="none"
-          src="/berlakuid.png"
-          width={154}
-          height={30}
-          alt="berlaku.id Logo"
-        />
-        </Link>
-        </div>
+    <div>
       <div className="mb-4">
-        <p>Selamat datang di berlaku.id - sistem pengingat kaya fitur</p>
+        <p className="text-white font-bold lg:text-2xl text-md">Login Sekarang</p>
+                 
       </div>
       <form onSubmit={handleLogin}>
         <div className="space-y-4">
-          <Input name="email" placeholder="Email" />
-          <Input name="password" placeholder="Password" type="password" />
+          <Input name="email" placeholder="Email" variant="bordered" />
+          <Input name="password" placeholder="Password" type="password" variant="bordered" />
           <Button type="submit" color="primary" className="w-full">
             Login
           </Button>
         </div>
       </form>
       <Link href="register">
-          <div className="flex justify-center mt-4">
-            Register sekarang
+          <div className="flex justify-center mt-4 font-12">
+            Belum punya akun? Daftar di sini
           </div>
-        </Link>
+      </Link>
       </div>
-    </div>
+      
   );
 };

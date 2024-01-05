@@ -52,45 +52,31 @@ export const Register = () => {
   }
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div>
-        <div className="my-8">
-          <div className="flex justify-center mb-4">
-          <Link href="https://berlaku.id">
-            <Image
-              as={NextImage}
-              radius="none"
-              src="/berlakuid.png"
-              width={154}
-              height={30}
-              alt="berlaku.id Logo"
-            />
-            </Link>
-            </div>
-            <div className="mb-4">
-          <p>Silahkan daftarkan akun Anda di berlaku.id</p>
-          </div>
-        </div>
-        <form onSubmit={handleRegister}>
+    <div>
+      <div className="mb-4">
+         <p className="text-white font-bold lg:text-2xl text-md">Daftar Sekarang</p>
+                 
+      </div>
+      
+      <form onSubmit={handleRegister}>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-2">
-              <Input name="firstName" placeholder="First Name" />
-              <Input name="lastName" placeholder="Last Name" />
+            <div className="grid lg:grid-cols-2  grid-cols-1 gap-2">
+              <Input name="firstName" placeholder="First Name" variant="bordered"/>
+              <Input name="lastName" placeholder="Last Name" variant="bordered"/>
             </div>
-            <Input name="username" placeholder="Username" />
-            <Input name="email" placeholder="Email" />
-            <Input name="password" placeholder="Password" type="password" />
+            <Input variant="bordered" name="username" placeholder="Username" />
+            <Input variant="bordered" name="email" placeholder="Email" />
+            <Input variant="bordered" name="password" placeholder="Password" type="password" />
             <Button color="primary" type="submit" className="w-full">
               Register
             </Button>
           </div>
         </form>
-        <Link href="login">
-          <div className="flex justify-center mt-4">
-            Login sekarang
+      <Link href="login">
+          <div className="flex justify-center mt-4 font-12">
+            Sudah punya akun? Login di sini
           </div>
-        </Link>
+      </Link>
       </div>
-    </div>
   );
 };
