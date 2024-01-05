@@ -4,9 +4,10 @@ import CardCounter from "./cardCounter";
 import CardItemList from "./cardItemList";
 import { Plus } from "lucide-react";
 import { apiUrl } from "@/config/apiUrl";
+import { cookies } from "next/headers";
 
-async function getData() {
-  const res = await fetch(`${apiUrl}/tasks`, {
+async function getData(userid) {
+  const res = await fetch(`${apiUrl}/tasks?id=${userid}`, {
     cache: "no-store",
   });
   const data = await res.json();
@@ -14,7 +15,9 @@ async function getData() {
 }
 
 export async function TaskList() {
-  const { data } = await getData();
+  let userid = null;
+  userid = cookies().get("userId")?.value;
+  const { data } = await getData(userid);
 
   return (
     <main className="space-y-8">

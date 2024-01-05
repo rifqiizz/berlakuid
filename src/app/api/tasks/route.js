@@ -9,6 +9,7 @@ export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
   const limit = searchParams.get("limit");
+  const searchId = searchParams.get("id");
   //console.log(searchParams);
   
   let tasks = null;
@@ -16,7 +17,7 @@ export async function GET(request) {
   let tasksLimited = null;
   let tasksCounted = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
-  const userId = cookies().get("userId")?.value;
+  const userId = searchId; //cookies().get("userId")?.value;
   //console.log(userId);
   //let userId = Cookies.get("userId");
   
@@ -39,10 +40,10 @@ export async function GET(request) {
       return NextResponse.json({ data: task, message: "Tasks fetched successfully" });
     }
 
-    if (limit=='dashboard') {
+    if (limit=='dashboard' && searchId) {
       tasksLimited = await prisma.task.findMany({
         where: {
-            userId,
+            userId: searchId,
           },
           include: {
             user: {
@@ -69,23 +70,28 @@ export async function GET(request) {
       //console.log('Average age:' + aggregations._avg.age)
     }
       
-    
-    tasks = await prisma.task.findMany({
-        where: {
-            userId,
-          },
-          include: {
-            user: {
-          //     /*select: {
-          //       username: true,
-          //       //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
-          //     },*/
-               select: {
-                 username: true,
-               },
-             },
-           },  
-    });
+    if(searchId)
+    {
+      tasks = await prisma.task.findMany({
+          where: {
+              userId: searchId,
+            },
+            include: {
+              user: {
+            //     /*select: {
+            //       username: true,
+            //       //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
+            //     },*/
+                select: {
+                  username: true,
+                },
+              },
+            },  
+      });
+    }
+
+    //console.log("userId tasks: ", searchId,);
+    //console.log("Tasks: ",tasks);
 
     return NextResponse.json({ data: tasks, message: "All Tasks fetched successfully" });
   } catch (error) {

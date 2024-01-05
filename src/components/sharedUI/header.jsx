@@ -38,7 +38,7 @@ export const Header = () => {
         <Dropdown>
           <DropdownTrigger>
             <Link href="#">
-              <div className="underline underline-offset-4">Task</div>
+              <div className="underline underline-offset-4">Pengingat</div>
             </Link>
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions">

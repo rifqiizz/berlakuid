@@ -7,8 +7,8 @@ import { apiUrl } from "@/config/apiUrl";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-async function getData() {
-  const res = await fetch(`${apiUrl}/tasks?limit=dashboard`, {
+async function getData(userid) {
+  const res = await fetch(`${apiUrl}/tasks?limit=dashboard&id=${userid}`, {
     cache: "no-store",
   });
   const data = await res.json();
@@ -18,7 +18,9 @@ async function getData() {
 }
 
 export async function Dashboard() {
-  const { data } = await getData();
+  let userid = null;
+  userid = cookies().get("userId")?.value;
+  const { data } = await getData(userid);
   //console.log(data);
   const total = data.length;
   let username = null;

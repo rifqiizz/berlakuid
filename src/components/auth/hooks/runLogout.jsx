@@ -14,6 +14,8 @@ export const runLogout = () => {
     Cookies.set("token",'');
     Cookies.set("userId", '');
     Cookies.set("username",'');
+    Cookies.set("firstName",'');
+    Cookies.set("lastName",'');
     //localStorage.removeItem("userdata");
 
     let valToken = Cookies.get("token");
