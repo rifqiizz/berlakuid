@@ -78,7 +78,7 @@ export async function User() {
     <main className="space-y-8">
       <section>
         <h2>Profile</h2>
-        <p>Halaman profilmu.</p>
+        <p>Halaman profil pengguna</p>
       </section>
       <section>
         <div className="flex justify-center items-center h-screen">

@@ -11,8 +11,13 @@ async function getData() {
 export default async function Page() {
   const { data } = await getData();
   return (
-    <>
-    <div  className="grid grid-cols-2 gap-6">
+    <main className="space-y-8">
+    <section>
+      <h2>Kategori</h2>
+      <p>Berikut ini daftar kategori pengingat yang bisa kamu pilih</p>
+    </section>
+    <section className="">
+    <div className="grid grid-cols-2 gap-6">
       {data.map(({ id, name, desc }) => {
         return (
           <div key={id}>
@@ -21,6 +26,7 @@ export default async function Page() {
         );
       })}
       </div>
-    </>
+      </section>
+    </main>
   );
 }

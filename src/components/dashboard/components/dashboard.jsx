@@ -85,7 +85,7 @@ export async function Dashboard() {
     <main className="space-y-8">
       <section>
         <h2>Dashboard</h2>
-        <p>Pantau ringkasan masa berlaku yang sudah kamu simpan di sini.</p>
+        <p>Pantau ringkasan pengingat masa berlaku yang sudah kamu simpan di sini</p>
       </section>
       <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
         <CardCounter item={total} text="Total Pengingat" />
@@ -99,7 +99,7 @@ export async function Dashboard() {
       </section>
       <Button className="btn-main btn-add">
         <Link href="/add-task" className="flex items-center">
-          <Plus /> <span className="ml-2">Buat Task Baru</span>
+          <Plus /> <span className="ml-2">Buat Pengingat Baru</span>
         </Link>
       </Button>
       <section className="">

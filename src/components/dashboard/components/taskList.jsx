@@ -22,8 +22,8 @@ export async function TaskList() {
   return (
     <main className="space-y-8">
       <section>
-        <h2>Daftar Task</h2>
-        <p>Daftar lengkap masa berlaku yang sudah kamu buat di sini.</p>
+        <h2>Daftar Pengingat</h2>
+        <p>Daftar lengkap pengingat masa berlaku yang sudah kamu buat di sini</p>
       </section>
       <section className="mobile-hide flex font-bold px-5">
         <div className="basis-1/2">Nama</div>
@@ -32,7 +32,7 @@ export async function TaskList() {
       </section>
       <Button className="btn-main btn-add">
         <Plus />
-        Buat Task Baru
+        Buat Pengingat Baru
       </Button>
       <section className="">
         {data?.map((data) => {
