@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { apiUrl } from "@/config/apiUrl";
 import { Button, Input } from "@nextui-org/react";
+import Avatar from 'boring-avatars';
 
 async function getData(id) {
   const res = await fetch(`${apiUrl}/users?id=${id}`, {
@@ -31,18 +32,25 @@ export async function User() {
       <section>
         <div className="flex justify-center items-center h-screen">
           <div className="h-[682px] w-[535px] bg-[#FFFFFF] border py-[35px] rounded-3xl shadow-lg">
-            <div className="flex justify-center mb-16">
-              <Image src="/pp.jpg" width={100} height={100} />
+            <div className="flex flex-col items-center mb-12">
+              <Avatar
+                size={100}
+                name={first + " " + last}
+                variant="beam"
+                //fcbf6b-a9ad94-42302e-f6daab-dabd7b
+                colors={['#0A0310', '#BA76E8', '#FF568E', '#FF7D10', '#FFB238']}
+              />
+              <div className="text-xl mt-2">{`${first} ${last}`}</div>
+            
             </div>
-            <div
-              className="text-center mt-[11px] text-[#808080] text-
-          xl font-normal"
-            ></div>
-
+            
             <form action="">
               <div className=" w-[441px] mx-auto">
                 <div>
-                  <Input variant="underlined" label="Display Name" value={`${first} ${last}`} />
+                  <Input variant="underlined" label="First Name" value={`${first}`} />
+                </div>
+                <div>
+                  <Input variant="underlined" label="Last Name" value={`${last}`} />
                 </div>
                 <div>
                   <Input variant="underlined" label="Username" value={username} />
@@ -55,7 +63,7 @@ export async function User() {
                 </div>
               </div>
             </form>
-            <div className="flex justify-between p-[35px] mt-[120px]">
+            <div className="flex justify-between p-[35px] mt-[40px]">
               <Link href="/dashboard">
                 <Button className="bg-white text-[#0066CC] border border-blue-[700]">Kembali</Button>
               </Link>
