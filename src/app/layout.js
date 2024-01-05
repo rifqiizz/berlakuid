@@ -13,8 +13,8 @@ const roboto = Roboto({
 })
 
 export const metadata = {
-  title: "ExpiryHub - devscale indonesia",
-  description: "Batch 3 Demo",
+  title: "berlaku.id - BYTEHUB",
+  description: "Devscale Indonesia | Batch 3",
 };
 
 export default function RootLayout({ children }) {
