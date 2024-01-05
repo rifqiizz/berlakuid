@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { getData } from "@/components/dashboard/hooks/taskDetailUser";
 import { Modal, ModalContent, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
+import { AlertTriangle } from 'lucide-react';
+import DeleteModal from "@/components/dashboard/components/deleteModal";
 
 export default function Page({ params }) {
   const { taskSlug } = params;
@@ -12,14 +14,15 @@ export default function Page({ params }) {
   const [formattedDate, setFormattedDate] = useState(null);
   const [formattedReminderDate, setFormattedReminderDate] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  
+  const [taskId, setTaskId] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
         const taskData = await getData(taskSlug);
-        setData(taskData.data); // Update data with taskData.data
+        setData(taskData.data);
+        setTaskId(taskData.data.id); // Update data with
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,7 +32,7 @@ export default function Page({ params }) {
     }
     fetchData();
   }, [taskSlug]);
-
+  
 
   useEffect(() => {
     if (data) {
@@ -48,7 +51,7 @@ export default function Page({ params }) {
       setFormattedReminderDate(formattedReminderDate);
     }
   }, [data]);
-
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -60,6 +63,7 @@ export default function Page({ params }) {
   return (
     <main className="space-y-12">
       <section>
+        
         <h2>Detail Reminder</h2>
         <p>Informasi detail dari pengingat masa berlaku Anda.</p>
       </section>
@@ -105,49 +109,7 @@ export default function Page({ params }) {
         </section>
         
       )}
-      <Modal 
-          backdrop="opaque" 
-          isOpen={isOpen} 
-          onOpenChange={onOpenChange}
-          motionProps={{
-            variants: {
-              enter: {
-                y: 0,
-                opacity: 1,
-                transition: {
-                  duration: 0.3,
-                  ease: "easeOut",
-                },
-              },
-              exit: {
-                y: -20,
-                opacity: 0,
-                transition: {
-                  duration: 0.2,
-                  ease: "easeIn",
-                },
-              },
-            }
-          }}
-        >
-          <ModalContent>
-            {(onClose) => (
-              <>
-              <ModalBody>
-                  Anda yakin akan menghapus pengingat?
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Batal
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                  Ya
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
+      <DeleteModal taskId={taskId} isOpen={isOpen} onOpenChange={onOpenChange} />
     </main>
   );
 }
