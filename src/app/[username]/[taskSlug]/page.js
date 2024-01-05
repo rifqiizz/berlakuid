@@ -6,8 +6,9 @@ import Link from "next/link";
 import { AlertTriangle } from 'lucide-react';
 import DeleteModal from "@/components/dashboard/components/deleteModal";
 
+
 export default function Page({ params }) {
-  const { taskSlug } = params;
+  const { taskSlug,username } = params;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,6 +16,8 @@ export default function Page({ params }) {
   const [formattedReminderDate, setFormattedReminderDate] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [taskId, setTaskId] = useState(null);
+  //console.log(taskSlug,username)
+ 
 
   useEffect(() => {
     async function fetchData() {
@@ -59,6 +62,7 @@ export default function Page({ params }) {
   if (!data) {
     return <div>Data not found</div>;
   }
+  
 
   return (
     <main className="space-y-12">
@@ -94,9 +98,12 @@ export default function Page({ params }) {
             </div>
             <div className='button-holder flex justify-between'>
               <div className="flex justify-start gap-4">
-                <Button color="secondary">
-                  Sunting
-                </Button> 
+                <Link href={`/${username}/${taskSlug}/edit-task`}>
+                  <Button color="secondary">
+                    Sunting
+                  </Button> 
+                </Link>
+                 
                 <Button color="danger" onPress={onOpen}>Hapus</Button>
               </div>
               <Link href="/dashboard">
