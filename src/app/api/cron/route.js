@@ -28,6 +28,7 @@ export async function GET(req) {
 
   if(task) {
     //console.log(task); //exit;
+    const finishedTask = [];
 
     for (const key in task) {
       if (task.hasOwnProperty(key)) {
@@ -50,13 +51,21 @@ export async function GET(req) {
             cache   : 'no-cache'
           });
           const data = await res.json();
-        
-          return NextResponse.json({ message: "Run sending email successfully" });
+          finishedTask.push({ success: true });
+          //return NextResponse.json({ message: "Run sending email successfully" });
         } catch (error) {
           console.error(error);
-          return NextResponse.json({ error: "Error sending email" });
+          //finishedTask.push({ success: false });
+          //return NextResponse.json({ error: "Error sending email" });
         }
       }
+    }
+
+    if(finishedTask.length===task.length){
+      return NextResponse.json({ message: "Run sending all email successfully" });
+    }
+    else{
+      return NextResponse.json({ error: "Error sending email(s)" });
     }
 
     // const kiriman = {
