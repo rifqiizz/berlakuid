@@ -18,6 +18,9 @@ export async function GET(req) {
           user: {
               select: {
                 email: true,
+                firstName: true,
+                lastName: true,
+                username: true,
                 //userId: userId,
               },
             },
