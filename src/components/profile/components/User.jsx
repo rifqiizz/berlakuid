@@ -1,7 +1,9 @@
+//"use client"
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
+//import Cookiestore from "js-cookie";
 import { apiUrl } from "@/config/apiUrl";
 import { Button, Input } from "@nextui-org/react";
 import Avatar from 'boring-avatars';
@@ -16,18 +18,67 @@ async function getData(id) {
 
 export async function User() {
   const userId = cookies().get("userId")?.value;
+  //const userId = Cookiestore.get("userId");
   const dataUser = await getData(userId);
+  //console.log("DataUser: ", dataUser);
   const first = dataUser.data.firstName;
   const last = dataUser.data.lastName;
   const username = dataUser.data.username;
   const email = dataUser.data.email;
   const joinDate = dataUser.data.createdAt;
 
+  // async function handleUpdateUser(event) {
+  //   event.preventDefault(); // Ga akan nge refresh
+  //   const formData = new FormData();
+
+  //   const first = event.target.firstName.value;
+  //   const last = event.target.lastName.value;
+  //   const username = event.target.username.value;
+  //   const email = event.target.email.value;
+
+  //   formData.append('firstName', first);
+  //   formData.append('lastName', last);
+  //   formData.append('username', username);
+  //   formData.append('email', email);
+  //   /*console.log('Name:', name);
+  //   console.log('Category:', selectedCategory);
+  //   console.log('Description:', description);
+  //   console.log('Day Reminder:', dayReminder);
+  //   console.log('Expiry Date:', expiryDate);
+  //   console.log('userId', userId);*/
+
+  //   try {
+  //     const res = await fetch(`/api/users/${userId}`, {
+  //       method: "PATCH",
+  //       body: formData,
+  //     });
+
+  //     if (!res.ok) {
+  //       throw new Error('Error update profile.');
+  //     }
+
+  //     const { message, errorMessage } = await res.json();
+      
+  //     if (errorMessage) {
+  //       console.log(errorMessage);
+  //       toast.error(errorMessage);
+  //       return;
+  //     }
+
+  //     console.log(message);
+  //     toast.success(message);
+      
+  //   } catch (error) {
+  //     console.error('Error:', error.message);
+  //     toast.error(error.message);
+  //   }
+  // }
+
   return (
     <main className="space-y-8">
       <section>
         <h2>Profile</h2>
-        <p>Halaman pengaturan profilmu.</p>
+        <p>Halaman profilmu.</p>
       </section>
       <section>
         <div className="flex justify-center items-center h-screen">
@@ -47,19 +98,19 @@ export async function User() {
             <form action="">
               <div className=" w-[441px] mx-auto">
                 <div>
-                  <Input variant="underlined" label="First Name" value={`${first}`} />
+                  <Input isReadOnly variant="underlined" label="First Name" value={`${first}`} />
                 </div>
                 <div>
-                  <Input variant="underlined" label="Last Name" value={`${last}`} />
+                  <Input isReadOnly variant="underlined" label="Last Name" value={`${last}`} />
                 </div>
                 <div>
-                  <Input variant="underlined" label="Username" value={username} />
+                  <Input isReadOnly variant="underlined" label="Username" value={username} />
                 </div>
                 <div>
-                  <Input variant="underlined" label="Email" value={email} />
+                  <Input isReadOnly variant="underlined" label="Email" value={email} />
                 </div>
                 <div>
-                  <Input variant="underlined" label="Bergabung sejak" value={joinDate} />
+                  <Input isReadOnly variant="underlined" label="Bergabung sejak" value={joinDate} />
                 </div>
               </div>
             </form>
@@ -67,7 +118,7 @@ export async function User() {
               <Link href="/dashboard">
                 <Button className="bg-white text-[#0066CC] border border-blue-[700]">Kembali</Button>
               </Link>
-              <Button className="bg-[#0066CC] text-white">Simpan</Button>
+              <Button className="hidden bg-[#0066CC] text-white">Simpan</Button>
             </div>
           </div>
         </div>
