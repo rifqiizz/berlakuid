@@ -1,9 +1,12 @@
 import { CategoryList } from "@/components/category/CategoryList";
 import { apiUrl } from "@/config/apiUrl";
 import React from "react";
+import parse from 'html-react-parser';
 
 async function getData() {
-  const res = await fetch(`${apiUrl}/categories`);
+  const res = await fetch(`${apiUrl}/categories`,{
+    cache: "no-store"
+  });
   const data = res.json();
   //console.log(data);
   
@@ -45,8 +48,12 @@ async function getData() {
   return data;
 }
 
+
 export default async function Page() {
   const { data } = await getData();
+  //console.log('kategori: ', data);
+  //const parsedIcon = parse({data['icon']});
+  
   return (
     <main className="space-y-8">
     <section>
