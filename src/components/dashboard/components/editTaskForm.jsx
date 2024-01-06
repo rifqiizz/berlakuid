@@ -4,30 +4,18 @@ import { useState, useEffect } from 'react';
 import { apiUrl } from "@/config/apiUrl";
 import toast from "react-hot-toast";
 import { exportCategory } from "../hooks/exportCategory.";
+import { getTask } from "../hooks/getTaskId";
+import { convertFromISO } from "../hooks/convertDate";
 
-
-
-function EditTaskForm({taskId}) {
- 
+function EditTaskForm({taskParam}) {
+  //console.log(taskParam);
+  
   const [categories, setCategories] = useState([]); 
   const [selectedCategory, setSelectedCategory] = useState('')
 
   const [task, setTask] = useState(null);
   
-   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        const taskData = await getTask(taskId);
-        setTask(taskData.data);
-        
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        
-      }
-    }
-    fetchData();
-  }, [taskSlug]);
+  
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value); 
@@ -45,7 +33,27 @@ function EditTaskForm({taskId}) {
     };
 
     fetchCategories();
-  }, []);
+
+    async function fetchData() {
+      try {
+       
+        const taskData = await getTask(taskParam);
+        setTask(taskData.data);
+
+        //console.log(taskData.data)
+        
+      } catch (error) {
+        console.error(error);
+        
+      }
+    }
+    fetchData();
+  }, [taskParam]);
+  useEffect(() => {
+  }, [task]);
+  //convert from ISO to dd/mm/yyyy
+  const initialDate = convertFromISO(task?.expiryDate);
+
   async function handleEditTask(event) {
     event.preventDefault(); // Ga akan nge refresh
     const formData = new FormData();
@@ -110,8 +118,8 @@ function EditTaskForm({taskId}) {
       <section>
         <div className='box-middle reminder-details add-form'>
           <form onSubmit={handleEditTask}>
-            <Input name="name" variant="underlined" label="Nama Pengingat" />
-            <select onChange={handleCategoryChange} value={selectedCategory}>
+            <Input name="name" variant="underlined" label="Nama Pengingat" value={task?.name} />
+            <select onChange={handleCategoryChange} value={task?.category}>
             
               {categories?.map((category) => (
                 <option key={category.id} value={category.name}>
@@ -122,9 +130,9 @@ function EditTaskForm({taskId}) {
             
           
            
-            <Input name="description" variant="underlined" label="Deskripsi" />
-            <Input name="dayReminder" variant="underlined" label="Reminder Sebelum ... hari" />
-            <Input name="expiryDate" className="datepicker" type="date" variant="underlined" label="Tanggal Kedaluarsa" />
+            <Input name="description" variant="underlined" label="Deskripsi" value={task?.description} />
+            <Input name="dayReminder" variant="underlined" label="Reminder Sebelum ... hari" value={task?.dayReminder} />
+            <Input name="expiryDate" className="datepicker" type="date" variant="underlined" label="Tanggal Kedaluarsa" placeholder={initialDate} />
             <div className='button-holder flex justify-between mt-8'>
               <Button type="submit" color="primary">
                 Simpan

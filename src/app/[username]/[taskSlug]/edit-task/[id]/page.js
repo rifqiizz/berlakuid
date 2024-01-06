@@ -2,12 +2,12 @@
 import EditTaskForm from '@/components/dashboard/components/editTaskForm';
 
 
-const Page = ({params}) => {
-  const taskId = params.id;
-
+const Page = (params) => {
+  const data = params.params.id;
+  
   return (
     <div>
-      <EditTaskForm taskId={taskId} />
+      <EditTaskForm taskParam={data} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { apiUrl } from "@/config/apiUrl";
 
 export async function getTask(id) {
   
-  const res = await fetch(`${apiUrl}/tasks/${id}`);
+  const res = await fetch(`${apiUrl}/tasks?idtask=${id}`);
   
   if (!res.ok) {
     throw new Error("Failed to fetch data");
