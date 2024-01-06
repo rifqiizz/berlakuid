@@ -10,6 +10,7 @@ export async function GET(request) {
   const slug = searchParams.get("slug");
   const limit = searchParams.get("limit");
   const searchId = searchParams.get("id");
+  const idtask = searchParams.get("idtask");
   //console.log(searchParams);
   
   let tasks = null;
@@ -26,6 +27,24 @@ export async function GET(request) {
       task = await prisma.task.findUnique({
         where: {
           slug,
+        },
+        include: {
+            user: {
+                select: {
+                  username: true,
+                  //userId: userId,
+                },
+              },
+        },
+      });
+
+      return NextResponse.json({ data: task, message: "Tasks fetched successfully" });
+    }
+
+    if (idtask) {
+      task = await prisma.task.findUnique({
+        where: {
+          id: idtask,
         },
         include: {
             user: {
@@ -175,3 +194,23 @@ export async function POST(request) {
       { status: 201 }
     );
   }
+
+  // export async function PATCH(request, { params }) {
+  //   //get params id
+  //   const idtask = params.idtask;
+  
+  //   //get request data
+  //   const { name } = await request.json();
+  
+  //   //update data
+  //   const post = await prisma.task.update({
+  //     where: {
+  //       id: idtask,
+  //     },
+  //     data: {
+  //       name: name,
+  //       updatedAt: new Date(),
+  //     },
+  //   });
+
+  // }
