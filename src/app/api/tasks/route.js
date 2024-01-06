@@ -195,22 +195,36 @@ export async function POST(request) {
     );
   }
 
-  // export async function PATCH(request, { params }) {
-  //   //get params id
-  //   const idtask = params.idtask;
-  
-  //   //get request data
-  //   const { name } = await request.json();
-  
-  //   //update data
-  //   const post = await prisma.task.update({
-  //     where: {
-  //       id: idtask,
-  //     },
-  //     data: {
-  //       name: name,
-  //       updatedAt: new Date(),
-  //     },
-  //   });
+  export async function PATCH(request, { params }) {
+    //get params id
+    const { name, description } = await request.json();
+    console.log(params);
+    const id = params.id;
+    console.log('ID ', id);
+    //get request data
+    
+    //console.log('Name ', name);
+    //update data
+    const post = await prisma.task.update({
+      where: {
+        id,
+      },
+      data: {
+        name: name,
+        description: description,
+        updatedAt: new Date(),
+      },
+    });
 
-  // }
+    //return response JSON
+    return NextResponse.json(
+    {
+      sucess: true,
+      message: "Data Task Updated!",
+      data: post,
+    },
+    {
+      status: 200,
+    }
+  );
+  }
