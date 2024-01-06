@@ -6,107 +6,84 @@ import toast from "react-hot-toast";
 import { exportCategory } from "../hooks/exportCategory.";
 import { getTask } from "../hooks/getTaskId";
 import { convertFromISO } from "../hooks/convertDate";
+import { useRouter } from "next/navigation";
 
-function EditTaskForm({taskParam}) {
-  //console.log(taskParam);
-  
+
+function EditTaskForm({ taskParam }) {
+  const router = useRouter();
   const [categories, setCategories] = useState([]); 
-  const [selectedCategory, setSelectedCategory] = useState('')
-
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [task, setTask] = useState(null);
-  
-  
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value); 
   }
+
+  async function fetchData() {
+    try {
+      const taskData = await getTask(taskParam);
+      setTask(taskData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const fetchedData = await exportCategory();
-        //console.log('Fetched Data:', fetchedData.data); 
         setCategories(fetchedData.data);
-        
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
     };
 
     fetchCategories();
-
-    async function fetchData() {
-      try {
-       
-        const taskData = await getTask(taskParam);
-        setTask(taskData.data);
-
-        //console.log(taskData.data)
-        
-      } catch (error) {
-        console.error(error);
-        
-      }
-    }
     fetchData();
   }, [taskParam]);
-  useEffect(() => {
-  }, [task]);
-  //convert from ISO to dd/mm/yyyy
+
   const initialDate = convertFromISO(task?.expiryDate);
 
   async function handleEditTask(event) {
-    event.preventDefault(); // Ga akan nge refresh
-    const formData = new FormData();
+    event.preventDefault(); // Prevents page refresh
 
+    // Access form fields and handle data submission
     const name = event.target.name.value;
     const description = event.target.description.value;
     const dayReminder = event.target.dayReminder.value;
     const expiryDate = event.target.expiryDate.value;
 
-    const dateObject = new Date(expiryDate);
-    const isoFormattedDate = dateObject.toISOString();
-
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('dayReminder', dayReminder);
-    formData.append('expiryDate', isoFormattedDate);
-    formData.append('category', selectedCategory);
-    formData.append('featuredImage', name);
     /*console.log('Name:', name);
     console.log('Category:', selectedCategory);
     console.log('Description:', description);
     console.log('Day Reminder:', dayReminder);
-    console.log('Expiry Date:', expiryDate);
-    console.log('userId', userId);*/
+    console.log('Expiry Date:', expiryDate);*/
 
-    /*try {
-      const res = await fetch("/api/tasks/", {
-        method: "POST",
-        body: formData,
-      });
+    const dateObject = new Date(expiryDate);
+    const isoFormattedDate = dateObject.toISOString();
 
-      if (!res.ok) {
-        throw new Error('Network response was not ok.');
-      }
+    const res = await fetch(`/api/tasks/${taskParam}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        name: name,
+        description: description,
+        dayReminder: Number(dayReminder),
+        category:selectedCategory,
+        expiryDate:isoFormattedDate,
+        
+      }),
+    });
+    const { message, errorMessage } = await res.json();
 
-      const { message, errorMessage } = await res.json();
-      
-      if (errorMessage) {
-        console.log(errorMessage);
-        toast.error(errorMessage);
-        return;
-      }
-
-      console.log(message);
-      toast.success(message);
-      
-    } catch (error) {
-      console.error('Error:', error.message);
-      toast.error(error.message);
+    if (errorMessage) {
+      console.log(errorMessage);
+      toast.error(errorMessage);
+      return;
     }
 
-   */
-    
+    console.log(message);
+    toast.success(message);
+    router.push("/dashboard");
   }
   
   return (
@@ -118,21 +95,46 @@ function EditTaskForm({taskParam}) {
       <section>
         <div className='box-middle reminder-details add-form'>
           <form onSubmit={handleEditTask}>
-            <Input name="name" variant="underlined" label="Nama Pengingat" value={task?.name} />
-            <select onChange={handleCategoryChange} value={task?.category}>
-            
+            <Input 
+              name="name" 
+              variant="underlined" 
+              label="Nama Pengingat" 
+              value={task?.name || ''} 
+              onChange={(event) => setTask({ ...task, name: event.target.value })}
+            />
+            <select 
+              onChange={handleCategoryChange} 
+              value={selectedCategory || ''}
+            >
               {categories?.map((category) => (
                 <option key={category.id} value={category.name}>
                   {category.name}
                 </option>
               ))}
             </select>
-            
-          
-           
-            <Input name="description" variant="underlined" label="Deskripsi" value={task?.description} />
-            <Input name="dayReminder" variant="underlined" label="Reminder Sebelum ... hari" value={task?.dayReminder} />
-            <Input name="expiryDate" className="datepicker" type="date" variant="underlined" label="Tanggal Kedaluarsa" placeholder={initialDate} />
+            <Input 
+              name="description" 
+              variant="underlined" 
+              label="Deskripsi" 
+              value={task?.description || ''} 
+              onChange={(event) => setTask({ ...task, description: event.target.value })}
+            />
+            <Input 
+              name="dayReminder" 
+              variant="underlined" 
+              label="Reminder Sebelum ... hari" 
+              value={task?.dayReminder || ''} 
+              onChange={(event) => setTask({ ...task, dayReminder: event.target.value })}
+            />
+            <Input 
+              name="expiryDate" 
+              className="datepicker" 
+              type="date" 
+              variant="underlined" 
+              label="Tanggal Kedaluarsa" 
+              placeholder={initialDate || ''} 
+              onChange={(event) => setTask({ ...task, expiryDate: event.target.value })}
+            />
             <div className='button-holder flex justify-between mt-8'>
               <Button type="submit" color="primary">
                 Simpan
