@@ -66,7 +66,7 @@ export async function PATCH(request, { params }) {
     {
       sucess: true,
       message: "Data Task Updated!",
-      data: task,
+      data: post,
     },
     {
       status: 200,
