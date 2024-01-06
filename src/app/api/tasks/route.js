@@ -189,7 +189,7 @@ export async function POST(request) {
  */  
     return NextResponse.json(
       {
-        message: "Task created successfully",
+        message: "Pengingat berhasil ditambahkan",
       },
       { status: 201 }
     );

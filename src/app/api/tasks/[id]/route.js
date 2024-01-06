@@ -70,7 +70,7 @@ export async function PATCH(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Updated!",
+      message: "Pengingat berhasil disimpan",
       data: post,
     },
     {
@@ -94,7 +94,7 @@ export async function DELETE(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Deleted!",
+      message: "Pengingat berhasil dihapus",
     },
     {
       status: 200,
