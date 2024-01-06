@@ -8,16 +8,6 @@ import Profile from "./profile";
 import { ChevronDown } from 'lucide-react';
 
 export const Header = () => {
-  const { theme, setTheme } = useTheme();
-
-  function setThemeMode(value) {
-    if (value) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }
-
   return (
     <header className="flex justify-between items-center">
       <Link href="/dashboard">
@@ -31,9 +21,6 @@ export const Header = () => {
       <div className="flex gap-4 items-center font-bold">
         <Link href="/dashboard">
           <div>Dashboard</div>
-        </Link>
-        <Link href="/category">
-          <div>Kategori</div>
         </Link>
         
         <Dropdown>
@@ -55,12 +42,10 @@ export const Header = () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-
-        <Link href="#">
-          <div>Riwayat</div>
+        <Link href="/category">
+          <div>Kategori</div>
         </Link>
 
-        <Switch size="sm" onChange={(e) => setThemeMode(e.target.checked)} />
         <Profile/>
       </div>
     </header>

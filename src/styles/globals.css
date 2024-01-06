@@ -34,11 +34,11 @@
   }
   .card-counter{
     @apply bg-white rounded-lg p-7;
-    box-shadow: 0px 0px 10px 2px #00000040;
+    box-shadow: 0px 0px 10px 2px #00000020;
   }
   .card-item-list{
      @apply bg-white p-5 mb-3;
-     box-shadow: 0px 0px 10px 2px #00000040;
+     box-shadow: 0px 0px 10px 2px #00000020;
   }
   .card-counter-wrap {
 

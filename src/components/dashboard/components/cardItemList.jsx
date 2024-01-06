@@ -44,7 +44,7 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
   else if(diffExpired==0) {statusExp="Today";statusColor="bg-orange-300";}
   else {statusExp="Lewat";statusColor="bg-red-200";}
 
-  if((diffExpired<0) && (Math.abs(diffExpired)<dayReminder)) {statusColor="bg-yellow-400";}
+  if((diffExpired<0) && (Math.abs(diffExpired)<dayReminder)) {statusExp="Segera";statusColor="bg-yellow-200";}
 
   //console.log("Selisih ke expired ",statusExp," ",statusColor," ", diffExpired);
   //console.log("Selisih ke request ",statusExp," ",statusColor," ", diffRequest);
@@ -61,7 +61,7 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
           <div className="hidden">{id}</div>
           <div className="md:basis-1/2 basis-full name-task">{name}</div>
           <div className="md:basis-2/12 basis-full first-letter:cat-task">{category}</div>
-          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">{hasReminderPassed ? (
+          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">{diffExpired>=0 ? (
             <div>
               <BellOff size={16} />
               <span style={{ textDecoration: 'line-through' }}>
