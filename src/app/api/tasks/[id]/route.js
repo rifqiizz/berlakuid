@@ -1,6 +1,6 @@
 //import next request and response
 import { NextResponse } from "next/server";
-
+import slugify from "slugify";
 //import prisma client
 import prisma from "@/utils/prisma";
 
@@ -47,7 +47,7 @@ export async function PATCH(request, { params }) {
   const id = params.id;
 
   //get request data
-  const { name, description } = await request.json();
+  const { name, description, dayReminder, category, expiryDate } = await request.json();
 
   //update data
   const post = await prisma.task.update({
@@ -56,8 +56,13 @@ export async function PATCH(request, { params }) {
     },
     data: {
       name: name,
+      slug: slugify(name, { lower: true, replacement: "-" }),
       description: description,
       updatedAt: new Date(),
+      dayReminder: Number(dayReminder),
+      category:category,
+      expiryDate:expiryDate,
+       
     },
   });
 
@@ -65,7 +70,7 @@ export async function PATCH(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Updated!",
+      message: "Pengingat berhasil disimpan",
       data: post,
     },
     {
@@ -89,7 +94,7 @@ export async function DELETE(request, { params }) {
   return NextResponse.json(
     {
       sucess: true,
-      message: "Data Task Deleted!",
+      message: "Pengingat berhasil dihapus",
     },
     {
       status: 200,

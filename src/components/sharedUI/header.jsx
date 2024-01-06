@@ -5,6 +5,7 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button,Switch} fr
 import Link from "next/link";
 import Image from 'next/image'
 import Profile from "./profile";
+import { ChevronDown } from 'lucide-react';
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -38,7 +39,7 @@ export const Header = () => {
         <Dropdown>
           <DropdownTrigger>
             <Link href="#">
-              <div className="underline underline-offset-4">Pengingat</div>
+              <div className="flex justify-end items-center">Pengingat<ChevronDown size={20} color="#000000" className="ml-1"/></div>
             </Link>
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions">

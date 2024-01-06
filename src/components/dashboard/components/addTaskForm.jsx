@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { apiUrl } from "@/config/apiUrl";
 import toast from "react-hot-toast";
 import { exportCategory } from "../hooks/exportCategory.";
-
+import { useRouter } from "next/navigation";
 
 
 function AddTaskForm() {
- 
+  const router = useRouter();
   const [categories, setCategories] = useState([]); 
   const [selectedCategory, setSelectedCategory] = useState('')
   
@@ -76,6 +76,7 @@ function AddTaskForm() {
 
       console.log(message);
       toast.success(message);
+      router.push("/dashboard");
       
     } catch (error) {
       console.error('Error:', error.message);
