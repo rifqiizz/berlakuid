@@ -98,7 +98,7 @@ export default function Page({ params }) {
             </div>
             <div className='button-holder flex justify-between'>
               <div className="flex justify-start gap-4">
-                <Link href={`/${username}/${taskSlug}/edit-task`}>
+                <Link href={`/${username}/${taskSlug}/edit-task/${taskId}`}>
                   <Button color="secondary">
                     Sunting
                   </Button> 

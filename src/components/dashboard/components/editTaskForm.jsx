@@ -7,12 +7,27 @@ import { exportCategory } from "../hooks/exportCategory.";
 
 
 
-function EditTaskForm() {
+function EditTaskForm({taskId}) {
  
   const [categories, setCategories] = useState([]); 
   const [selectedCategory, setSelectedCategory] = useState('')
-  
 
+  const [task, setTask] = useState(null);
+  
+   useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const taskData = await getTask(taskId);
+        setTask(taskData.data);
+        
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        
+      }
+    }
+    fetchData();
+  }, [taskSlug]);
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value); 
