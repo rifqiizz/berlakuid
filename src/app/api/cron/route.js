@@ -8,11 +8,20 @@ export async function GET(req) {
 
     task = await prisma.task.findMany({
       where: {
-        expiryDate: //new Date(),
-        {
-          // new Date() creates date with current time and day and etc.
-          lte: new Date()
-        },
+        //OR: [
+          expiryDate: //new Date(),
+          {
+            // new Date() creates date with current time and day and etc.
+            lte: new Date(),
+            gte: new Date()
+          },
+        //   expiryDate: //new Date(),
+        //   {
+        //     // new Date() creates date with current time and day and etc.
+        //     lte: new Date(),
+        //     gte: new Date()
+        //   },
+        // ],
       },
       include: {
           user: {
