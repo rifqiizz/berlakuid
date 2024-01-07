@@ -12,8 +12,7 @@ export async function GET(req) {
           expiryDate: //new Date(),
           {
             // new Date() creates date with current time and day and etc.
-            lte: new Date(),
-            gte: new Date()
+            lte: new Date()
           },
         //   expiryDate: //new Date(),
         //   {
@@ -39,7 +38,7 @@ export async function GET(req) {
     //return task;
 
   if(task) {
-    //console.log(task); //exit;
+    console.log("Task Delivery today: ", task); //exit;
     const finishedTask = [];
 
     for (const key in task) {
