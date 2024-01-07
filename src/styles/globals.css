@@ -109,6 +109,13 @@
   .box-login input,.box-login input::placeholder{
     color:#ffffff !important
   }
+  @media(min-width:768px){
+    .desktop-hide{
+      display: none;
+    }
+
+  }
+
   
   @media(max-width:767px){
     .mobile-hide{
