@@ -32,6 +32,16 @@ export const AuthLayout = ({ children }) => {
             />
           </div>
           <div className="padding-4-rem padding-2-rem-mob h-[100%] flex items-center flex-col justify-center lg:w-[50%] w-[100%]">
+            <Link href="https://berlaku.id" className="mb-8 desktop-hide">
+                  <Image
+                    as={NextImage}
+                    radius="none"
+                    src="/berlaku-white.png"
+                    width={154}
+                    height={30}
+                    alt="berlaku.id Logo"
+                  />
+            </Link>
             <div className="box-login">
               
               <div className="mb-4">

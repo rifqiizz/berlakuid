@@ -67,7 +67,7 @@ export const Register = () => {
             <Input variant="bordered" name="username" placeholder="Username" />
             <Input variant="bordered" name="email" placeholder="Email" />
             <Input variant="bordered" name="password" placeholder="Password" type="password" />
-            <Button color="primary" type="submit" className="w-full">
+            <Button color="primary" type="submit" className="w-full bg-blue-800">
               Register
             </Button>
           </div>

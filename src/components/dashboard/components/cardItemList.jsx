@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { BellRing, BellOff } from 'lucide-react';
+import { BellRing, BellOff, CalendarClock,CalendarRange } from 'lucide-react';
 import moment from 'moment';
 
 const CardItemList = ({ id, name, category, expiryDate, username, slug, source,dayReminder }) => {
@@ -59,27 +59,42 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
       <Link href={`/${username}/${slug}`}>
         <div className="flex md:flex-row flex-col items-center">
           <div className="hidden">{id}</div>
-          <div className="md:basis-1/2 basis-full name-task">{name}</div>
-          <div className="md:basis-2/12 basis-full first-letter:cat-task">{category}</div>
-          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">{diffExpired>=0 ? (
+          <div className="md:basis-1/2 basis-full name-task flex">{name}</div>
+          <div className="md:basis-2/12 basis-full first-letter:cat-task flex">{category}</div>
+          <div className="md:basis-4/12 basis-full reminder-task">
+            <div className="flex items-center">
+              <div></div>
+              <div>{formattedDate}<br /><span className="font-12">{diffExpired >= 0 ? (
             <div>
-              <BellOff size={16} />
-              <span style={{ textDecoration: 'line-through' }}>
-              Pengingat: {formattedReminderDate}
-              
-            </span>
-            <span className="text-xs text-red-600 block"><i>Sudah lewat </i>{Math.abs(diffExpired)} hari</span>
+                  <div className="flex my-2">
+                    <BellOff size={16} className="mr-2"/>
+                     <span style={{ textDecoration: 'line-through' }}>
+                      Pengingat: {formattedReminderDate}
+                      
+                    </span>
+                  </div>
+                 
+                <span className="text-xs text-red-600 block"><i>Sudah lewat </i>{Math.abs(diffExpired)} hari</span>
             </div>
           ) : (
-            <div><span>
-              <BellRing size={16} />
-              Pengingat: {formattedReminderDate}
-              
-            </span>
+                  <div>
+                    <div className="flex my-2">
+                      <BellRing size={16} className="mr-2"/>
+                      <span>
+                   
+                        Pengingat: {formattedReminderDate}
+                        
+                      </span>
+
+                    </div>
+                  
             <span className="text-xs text-blue-600 block">{Math.abs(diffExpired)} hari lagi</span>
             </div>
           )}
-          </span></div>
+              </span>
+              </div>
+            </div>
+            </div>
         </div>
       </Link>
     </div>

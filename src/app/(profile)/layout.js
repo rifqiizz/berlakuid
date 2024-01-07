@@ -3,3 +3,4 @@ import { DashboardLayout } from "@/components/dashboard/components/dashboardLayo
 export default function Layout({ children }) {
   return <DashboardLayout>{children}</DashboardLayout>;
 }
+

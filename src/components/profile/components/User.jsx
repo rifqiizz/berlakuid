@@ -8,6 +8,8 @@ import { apiUrl } from "@/config/apiUrl";
 import { Button, Input } from "@nextui-org/react";
 import Avatar from 'boring-avatars';
 
+import { convertFromISO } from "@/components/dashboard/hooks/convertDate";
+
 async function getData(id) {
   const res = await fetch(`${apiUrl}/users?id=${id}`, {
     cache: "no-store",
@@ -25,7 +27,10 @@ export async function User() {
   const last = dataUser.data.lastName;
   const username = dataUser.data.username;
   const email = dataUser.data.email;
-  const joinDate = dataUser.data.createdAt;
+  const joinDate = convertFromISO(dataUser.data.createdAt);
+
+  
+
 
   // async function handleUpdateUser(event) {
   //   event.preventDefault(); // Ga akan nge refresh
