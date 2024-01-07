@@ -114,7 +114,7 @@ export async function Dashboard() {
         </Link>
       </Button>
       <section className="">
-        {data?.map((data) => {
+        {data?.slice(0, 5).map((data) => {
           return (
             <CardItemList
               key={data.id}
