@@ -64,6 +64,7 @@
     @apply py-3;
     font-family: var(--font-roboto)
   }
+  
  
   .detail {
     display: flex;

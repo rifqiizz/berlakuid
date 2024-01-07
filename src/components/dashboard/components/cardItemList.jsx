@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { BellRing, BellOff } from 'lucide-react';
+import { BellRing, BellOff, CalendarClock,CalendarRange } from 'lucide-react';
 import moment from 'moment';
 
 const CardItemList = ({ id, name, category, expiryDate, username, slug, source,dayReminder }) => {
@@ -59,16 +59,19 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
       <Link href={`/${username}/${slug}`}>
         <div className="flex md:flex-row flex-col items-center">
           <div className="hidden">{id}</div>
-          <div className="md:basis-1/2 basis-full name-task">{name}</div>
-          <div className="md:basis-2/12 basis-full first-letter:cat-task">{category}</div>
-          <div className="md:basis-4/12 basis-full reminder-task">{formattedDate}<br /><span className="font-12">{diffExpired>=0 ? (
+          <div className="md:basis-1/2 basis-full name-task flex"><BellRing size={24} color={'#11181C'} className="mr-3" />{name}</div>
+          <div className="md:basis-2/12 basis-full first-letter:cat-task flex"><CalendarClock size={24} color={'#11181C'} className="mr-3"/>{category}</div>
+          <div className="md:basis-4/12 basis-full reminder-task">
+            <div className="flex items-center">
+              <div><CalendarRange size={24} color={'#11181C'} className="mr-3"/></div>
+              <div>{formattedDate}<br /><span className="font-12">{diffExpired >= 0 ? (
             <div>
-              <BellOff size={16} />
-              <span style={{ textDecoration: 'line-through' }}>
-              Pengingat: {formattedReminderDate}
-              
-            </span>
-            <span className="text-xs text-red-600 block"><i>Sudah lewat </i>{Math.abs(diffExpired)} hari</span>
+                  <BellOff size={16} />
+                  <span style={{ textDecoration: 'line-through' }}>
+                  Pengingat: {formattedReminderDate}
+                  
+                </span>
+                <span className="text-xs text-red-600 block"><i>Sudah lewat </i>{Math.abs(diffExpired)} hari</span>
             </div>
           ) : (
             <div><span>
@@ -80,6 +83,8 @@ const CardItemList = ({ id, name, category, expiryDate, username, slug, source,d
             </div>
           )}
           </span></div>
+            </div>
+            </div>
         </div>
       </Link>
     </div>
