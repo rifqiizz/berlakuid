@@ -2,8 +2,11 @@ import { Header } from "@/components/sharedUI/header";
 import { apiUrl, imageUrl } from "@/config/apiUrl";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
+  redirect('/dashboard');
+
   return (
     <main className="max-w-5xl m-auto py-8 space-y-20">
       <Header />
