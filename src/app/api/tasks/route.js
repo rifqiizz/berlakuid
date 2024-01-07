@@ -73,7 +73,7 @@ export async function GET(request) {
                 },
               },
           },
-          take: 5,
+          //take: 5,
           orderBy: {
             expiryDate: 'asc',
           },
