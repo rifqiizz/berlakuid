@@ -43,7 +43,7 @@ export const Login = () => {
         <div className="space-y-4">
           <Input name="email" placeholder="Email" variant="bordered" />
           <Input name="password" placeholder="Password" type="password" variant="bordered" />
-          <Button type="submit" color="primary" className="w-full">
+          <Button type="submit" color="primary" className="w-full bg-blue-800">
             Login
           </Button>
         </div>
