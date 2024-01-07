@@ -1,11 +1,5 @@
-import { Header } from "@/components/sharedUI/header";
-import React from "react";
+import { DashboardLayout } from "@/components/dashboard/components/dashboardLayout";
 
 export default function Layout({ children }) {
-  return (
-    <main className="max-w-5xl m-auto py-8 space-y-20">
-      <Header />
-      <div>{children}</div>
-    </main>
-  );
+  return <DashboardLayout>{children}</DashboardLayout>;
 }

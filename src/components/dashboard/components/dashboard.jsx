@@ -88,9 +88,9 @@ export async function Dashboard() {
         <p>Pantau ringkasan pengingat masa berlaku yang sudah kamu simpan di sini</p>
       </section>
       <section className="grid md:grid-cols-3 grid-cols-1 gap-6 pb-8 card-counter-wrap ">
-        <CardCounter item={total} text="Total Pengingat" bg="bg-blue-100"/>
-        <CardCounter item={numberOfItemsInCurrentMonth} text="Pengingat dalam bulan ini" bg="bg-blue-300"/>
-        <CardCounter item={numberOfItemsInFollowingWeek} text="Pengingat pada pekan depan" bg="bg-blue-400"/>
+        <CardCounter item={total} text="Total Pengingat" bg="bg-blue-100" type="total"/>
+        <CardCounter item={numberOfItemsInCurrentMonth} text="Pengingat dalam bulan ini" bg="bg-blue-300" type="thisMonth"/>
+        <CardCounter item={numberOfItemsInFollowingWeek} text="Pengingat pada pekan depan" bg="bg-blue-400" type="thisWeek"/>
       </section>
       <section className="mobile-hide flex font-bold px-5">
         <div className="basis-1/2">Nama</div>
