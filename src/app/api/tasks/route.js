@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/utils/prisma";
+import { Prisma } from '@prisma/client'
 //import { uploadFile } from "@/lib/uploadFile";
 import slugify from "slugify";
 import { verify } from "jsonwebtoken";
@@ -16,7 +17,7 @@ export async function GET(request) {
   let tasks = null;
   let task = null;
   let tasksLimited = null;
-  let tasksCounted = null;
+  let tasksSumm = null;
   //let userId = "952bbd57-6f74-4aa6-86d5-104c27e072ef";
   const userId = searchId; //cookies().get("userId")?.value;
   //console.log(userId);
@@ -80,13 +81,27 @@ export async function GET(request) {
         return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
     } 
 
-    if (limit=='summary') {
-      tasksCounted = await prisma.$queryRaw(
-        Prisma.sql`SELECT COUNT(id) FROM task WHERE userId = ${userId}`
-      );
-      //console.log(tasksCounted);
-      return NextResponse.json({ data: tasksCounted, message: "Counted Tasks fetched successfully" });
-      //console.log('Average age:' + aggregations._avg.age)
+    if (limit=='summary' && searchId) {
+      tasksSumm = await prisma.task.findMany({
+        where: {
+            userId: searchId,
+          },
+          include: {
+            user: {
+          //     /*select: {
+          //       username: true,
+          //       //userId: "952bbd57-6f74-4aa6-86d5-104c27e072ef",
+          //     },*/
+              select: {
+                username: true,
+              },
+            },
+          },  
+          orderBy: {
+            expiryDate: 'asc',
+          }
+      });
+      return NextResponse.json({ data: tasksSumm, message: "Dashboard Tasks Summary fetched successfully" });
     }
       
     if(searchId)

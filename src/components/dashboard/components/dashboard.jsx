@@ -17,15 +17,26 @@ async function getData(userid) {
   return data;
 }
 
+async function getDataSummary(userid) {
+  const res = await fetch(`${apiUrl}/tasks?limit=summary&id=${userid}`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  
+
+  return data;
+}
+
 export async function Dashboard() {
   let userid = null;
   userid = cookies().get("userId")?.value;
   const { data } = await getData(userid);
-  //console.log(data);
-  const total = data.length;
+  console.log(data);
+  const total = data.length; //prev:data
   let username = null;
   username = cookies().get("username")?.value;
-
+  const { dataSummary } = await getDataSummary(userid);
+  console.log(dataSummary);
 
   // Get the current month and year
   const currentDate = new Date();
