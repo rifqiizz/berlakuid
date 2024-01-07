@@ -109,6 +109,13 @@
   .box-login input,.box-login input::placeholder{
     color:#ffffff !important
   }
+  .transButton{
+    background-color: transparent;
+    padding: 0;
+    min-width: auto;
+    min-height: auto;
+    height: auto;
+  }
   @media(min-width:768px){
     .desktop-hide{
       display: none;

@@ -1,11 +1,11 @@
 "use client"
 import { useState, useEffect } from "react";
 import { getData } from "@/components/dashboard/hooks/taskDetailUser";
-import { Modal, ModalContent, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Button, useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
-import { AlertTriangle } from 'lucide-react';
-import DeleteModal from "@/components/dashboard/components/deleteModal";
 
+import DeleteModal from "@/components/dashboard/components/deleteModal";
+import { Pencil, Trash2 } from 'lucide-react';
 
 export default function Page({ params }) {
   const { taskSlug,username } = params;
@@ -96,21 +96,23 @@ export default function Page({ params }) {
               <span className="label">Reminder On:</span>
               <span className="value">{formattedReminderDate}</span>
             </div>
-            <div className='button-holder flex justify-between'>
-              <div className="flex justify-start gap-4">
-                <Link href={`/${username}/${taskSlug}/edit-task/${taskId}`}>
-                  <Button color="secondary">
-                    Sunting
-                  </Button> 
-                </Link>
-                 
-                <Button color="danger" onPress={onOpen}>Hapus</Button>
-              </div>
+            <div className='button-holder flex justify-between items-center'>
               <Link href="/dashboard">
                 <Button color="primary">
                   Kembali
                 </Button> 
               </Link>
+              <div className="flex justify-start gap-4">
+                <Link href={`/${username}/${taskSlug}/edit-task/${taskId}`}>
+                  
+                  
+                  <Pencil size={24} color={'#0070F0'} className="mr-3"/>
+                </Link>
+                 
+                <Button className="transButton" onPress={onOpen}> <Trash2 size={24} color={'#0070F0'} onPress={onOpen}/></Button>
+               
+              </div>
+              
             </div>
           </div>
         </section>
