@@ -71,11 +71,11 @@ export async function GET(request) {
                   //userId: userId,
                 },
               },
-        },
-        take: 5,
-        orderBy: {
-          createdAt: 'desc',
-        },
+          },
+          take: 5,
+          orderBy: {
+            expiryDate: 'asc',
+          },
         });
         return NextResponse.json({ data: tasksLimited, message: "Dashboard Tasks fetched successfully" });
     } 
@@ -106,6 +106,9 @@ export async function GET(request) {
                 },
               },
             },  
+            orderBy: {
+              expiryDate: 'asc',
+            },
       });
     }
 
